@@ -70,24 +70,40 @@ def save_dataset_to_csv(gpx_dir="data/gpx", output_file="dataset.csv"):
 
 
 
-def main():
-    bbox = (42.2, 0.5, 43.3, 2.3)
-    
-    # print("Descargando rutas")
-    # osm_data = osm.fetch_hiking_routes(bbox, 5)
-    
-    # print(f"📦 Recibidos {len(osm_data['elements'])} elementos")
-    
-    # print("\nGuardando rutas como GPX")
-    # save_all_routes(osm_data, output_dir="data/gpx")
-    
+def main():  
+    bboxes = [
+        ("pirineos", (42.2, 0.5, 43.3, 2.3)),
+        ("picos_europa", (43.1, -5.0, 43.3, -4.7)),
+        ("sierra_nevada", (36.9, -3.5, 37.1, -3.3)),
+        ("gredos", (40.2, -5.3, 40.4, -5.0)),
+        ("teide", (28.2, -16.7, 28.3, -16.6)),
+        ("montseny", (41.7, 2.3, 41.8, 2.5)),
+        ("alpes", (45.8, 6.8, 46.0, 7.0)),
+        ("himalaya", (27.9, 86.8, 28.1, 87.0)),
+        ("montanas_rocosas", (39.0, -106.5, 39.5, -105.5)),
+        ("andes", (-33.0, -70.0, -32.5, -69.5)),
+        ("kilimanjaro", (-3.1, 37.3, -3.0, 37.4)),
+        ("japan", (35.3, 138.7, 35.4, 138.8)),
+        ("matterhorn", (45.9, 7.6, 46.0, 7.7)),
+        ("atlas", (31.0, -8.0, 31.5, -7.5)),
+    ]
+
+    for name, bbox in bboxes:
+        print(f"\nDescargando rutas: {name}")
+        osm_data = osm.fetch_hiking_routes(bbox)
+        print(f"📦 Recibidos {len(osm_data['elements'])} elementos")
+
+        print("Guardando rutas como GPX")
+        save_all_routes(osm_data, output_dir=f"data/gpx/{name}")
+        
+
     # print("\nCreando CSV del dataset")
     # save_dataset_to_csv(gpx_dir="data/gpx", output_file="dataset.csv")
     
-    print("\nEntrenando modelo")
-    model_training(batch_size=128, epochs=500, lr=0.001)
+    # print("\nEntrenando modelo")
+    # model_training(batch_size=128, epochs=500, lr=0.001)
    
-    print("\nModelo entrenado")
+    # print("\nModelo entrenado")
     print("\nProceso finalizado")
 if __name__ == "__main__":
     main()
