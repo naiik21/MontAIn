@@ -8,6 +8,8 @@ from GPX_uses.gpx_loader import load_gpx
 import datasetter
 from GPX_uses.gpx_reloader import reloader_gpx
 from NeuronalNetwork import model_training
+from models.xgboost import xgboost
+from models.xgboost_regresion import xgboost_regresion
 
 
 
@@ -85,7 +87,9 @@ def main():
     # save_dataset_to_csv(gpx_dir="data/gpx", output_file="dataset.csv")
     
     print("\nEntrenando modelo")
-    model_training(batch_size=128, epochs=500, lr=0.001)
+    # model_training(batch_size=128, epochs=500, lr=0.001)
+    xgboost()
+    xgboost_regresion()
    
     print("\nModelo entrenado")
     print("\nProceso finalizado")
