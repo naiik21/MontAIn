@@ -7,9 +7,10 @@ import Fetch.osm_to_gpx as gpx
 from GPX_uses.gpx_loader import load_gpx
 import datasetter
 from GPX_uses.gpx_reloader import reloader_gpx
-from NeuronalNetwork import model_training
+from models.NeuronalNetwork import model_training
 from models.xgboost import xgboost
 from models.xgboost_regresion import xgboost_regresion
+from models.baseline import baseline
 
 
 
@@ -84,28 +85,24 @@ def main():
     montanas_rocosas=(39.0, -106.5, 39.5, -105.5)
     andes=(-33.0, -70.0, -32.5, -69.5)
     kilimanjaro=(-3.1, 37.3, -3.0, 37.4)
-    japan=(35.3, 138.7, 35.4, 138.8)
     matterhorn=(45.9, 7.6, 46.0, 7.7)
     atlas=(31.0, -8.0, 31.5, -7.5)
 
+    # print("Descargando rutas")
+    # osm_data = osm.fetch_hiking_routes(pirineos)
 
+    # print(f"📦 Recibidos {len(osm_data['elements'])} elementos")
 
-
-    print("Descargando rutas")
-    osm_data = fetch_hiking_routes(atlas)
-
-    print(f"📦 Recibidos {len(osm_data['elements'])} elementos")
-
-    print("\nGuardando rutas como GPX")
-    save_all_routes(osm_data, output_dir="data/gpx")
+    # print("\nGuardando rutas como GPX")
+    # save_all_routes(osm_data, output_dir="data/gpx")
 
     # print("\nCreando CSV del dataset")
     # save_dataset_to_csv(gpx_dir="data/gpx", output_file="bigDataset.csv")
     
     print("\nEntrenando modelo")
-    # model_training(batch_size=128, epochs=500, lr=0.001)
-    xgboost()
-    xgboost_regresion()
+    baseline(dataset_path="bigDataset.csv", test_size=0.25, random_state=42, show_plots=True)
+    xgboost(dataset_path="bigDataset.csv", test_size=0.25, random_state=42, show_plots=True)
+    xgboost_regresion(dataset_path="bigDataset.csv", test_size=0.25, random_state=42)
    
     # print("\nModelo entrenado")
     print("\nProceso finalizado")

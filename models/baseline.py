@@ -1,18 +1,15 @@
 import pandas as pd
-import xgboost as xgb
+import numpy as np
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import (
-    classification_report,
-    balanced_accuracy_score,
-    confusion_matrix
-)
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import classification_report, confusion_matrix, balanced_accuracy_score
 import seaborn as sns
 import matplotlib.pyplot as plt
 
 
-def xgboost(dataset_path="./dataset.csv", test_size=0.25, random_state=42, show_plots=True):
+def baseline(dataset_path="dataset.csv", test_size=0.25, random_state=42, show_plots=True):
     """
-    Entrena y evalúa un modelo XGBoost para clasificación de dificultad.
+    Entrena y evalúa un modelo RandomForest baseline para clasificación de dificultad.
     
     Args:
         dataset_path (str): Ruta al archivo CSV del dataset
@@ -24,10 +21,11 @@ def xgboost(dataset_path="./dataset.csv", test_size=0.25, random_state=42, show_
         dict: Diccionario con el modelo entrenado, métricas y datos de evaluación
     """
     # =====================
-    # 1. Dataset
+    # 1. Cargar dataset
     # =====================
     df = pd.read_csv(dataset_path)
 
+    # Mapear dificultad a entero
     difficulty_map = {
         "sendero fácil": 0,
         "moderado": 1,
@@ -38,8 +36,16 @@ def xgboost(dataset_path="./dataset.csv", test_size=0.25, random_state=42, show_
     }
 
     df["difficulty"] = df["difficulty"].map(difficulty_map)
+
+    # Eliminar columnas no útiles
     df = df.drop(columns=["filename"])
 
+    # Check
+    assert df["difficulty"].isnull().sum() == 0
+
+    # =====================
+    # 2. Features / Target
+    # =====================
     feature_cols = [
         "distance_km",
         "elevation_gain",
@@ -59,35 +65,34 @@ def xgboost(dataset_path="./dataset.csv", test_size=0.25, random_state=42, show_
     X = df[feature_cols]
     y = df["difficulty"]
 
+    assert X.isnull().sum().sum() == 0
+
     # =====================
-    # 2. Split
+    # 3. Train / Test split
     # =====================
     X_train, X_test, y_train, y_test = train_test_split(
-        X, y,
+        X,
+        y,
         test_size=test_size,
-        stratify=y,
-        random_state=random_state
+        random_state=random_state,
+        stratify=y
     )
 
     # =====================
-    # 3. Modelo XGBoost
+    # 4. RandomForest baseline
     # =====================
-    model = xgb.XGBClassifier(
-        objective="multi:softmax",
-        num_class=y.nunique(),
-        n_estimators=500,
-        max_depth=5,
-        learning_rate=0.05,
-        subsample=0.8,
-        colsample_bytree=0.8,
-        eval_metric="mlogloss",
-        random_state=random_state
+    model = RandomForestClassifier(
+        n_estimators=400,
+        min_samples_leaf=3,
+        class_weight="balanced",
+        random_state=random_state,
+        n_jobs=-1
     )
 
     model.fit(X_train, y_train)
 
     # =====================
-    # 4. Evaluación
+    # 5. Evaluación
     # =====================
     y_pred = model.predict(X_test)
 
@@ -96,19 +101,28 @@ def xgboost(dataset_path="./dataset.csv", test_size=0.25, random_state=42, show_
     print(classification_report(y_test, y_pred))
 
     cm = confusion_matrix(y_test, y_pred)
-    
+
     if show_plots:
+        plt.figure(figsize=(6, 5))
         sns.heatmap(cm, annot=True, fmt="d", cmap="Blues")
-        plt.title("Confusion Matrix - XGBoost")
         plt.xlabel("Predicted")
         plt.ylabel("True")
+        plt.title("Confusion Matrix")
         plt.show()
 
-        # =====================
-        # 5. Feature importance
-        # =====================
-        xgb.plot_importance(model, max_num_features=10)
-        plt.show()
+    # =====================
+    # 6. Feature importance
+    # =====================
+    importances = model.feature_importances_
+    indices = np.argsort(importances)[::-1]
+
+    print("\nFeature importance:")
+    feature_importance_dict = {}
+    for i in indices:
+        importance_value = importances[i]
+        feature_name = feature_cols[i]
+        print(f"{feature_name}: {importance_value:.3f}")
+        feature_importance_dict[feature_name] = importance_value
 
     return {
         "model": model,
@@ -119,6 +133,7 @@ def xgboost(dataset_path="./dataset.csv", test_size=0.25, random_state=42, show_
         "y_pred": y_pred,
         "balanced_accuracy": balanced_acc,
         "confusion_matrix": cm,
+        "feature_importance": feature_importance_dict,
         "feature_cols": feature_cols
     }
 

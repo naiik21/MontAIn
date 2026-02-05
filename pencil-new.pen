@@ -1,0 +1,2619 @@
+{
+  "version": "2.6",
+  "children": [
+    {
+      "type": "frame",
+      "id": "bi8Au",
+      "x": 0,
+      "y": 0,
+      "name": "Frame",
+      "clip": true,
+      "width": 800,
+      "height": 600,
+      "fill": "#FFFFFF",
+      "layout": "none"
+    },
+    {
+      "type": "frame",
+      "id": "aOMcN",
+      "x": 0,
+      "y": 0,
+      "name": "Landing Page",
+      "width": 1440,
+      "fill": "#FAFAFA",
+      "placeholder": true,
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "ZJIb1",
+          "name": "header",
+          "width": "fill_container",
+          "height": 80,
+          "fill": "#FFFFFF",
+          "stroke": {
+            "align": "inside",
+            "thickness": {
+              "bottom": 1
+            },
+            "fill": "#E5E5E5"
+          },
+          "padding": [
+            0,
+            120
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "ZGbXM",
+              "name": "logo",
+              "fill": "#1A1A1A",
+              "content": "MontAIn",
+              "fontFamily": "Inter",
+              "fontSize": 24,
+              "fontWeight": "600"
+            },
+            {
+              "type": "frame",
+              "id": "atPkd",
+              "name": "nav",
+              "gap": 32,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "8aIhg",
+                  "name": "navLink1",
+                  "fill": "#666666",
+                  "content": "Cómo funciona",
+                  "fontFamily": "Inter",
+                  "fontSize": 15,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "D5eWL",
+                  "name": "navLink2",
+                  "fill": "#666666",
+                  "content": "Ejemplos",
+                  "fontFamily": "Inter",
+                  "fontSize": 15,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "GRNO2",
+                  "name": "navLink3",
+                  "fill": "#666666",
+                  "content": "Precios",
+                  "fontFamily": "Inter",
+                  "fontSize": 15,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "EP32J",
+                  "name": "ctaHeader",
+                  "fill": "#0D6E6E",
+                  "cornerRadius": 8,
+                  "padding": [
+                    12,
+                    24
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "NnbTD",
+                      "name": "ctaHeaderText",
+                      "fill": "#FFFFFF",
+                      "content": "Comenzar",
+                      "fontFamily": "Inter",
+                      "fontSize": 15,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "hz0tE",
+          "name": "hero",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 32,
+          "padding": 120,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "HNvGg",
+              "name": "heroHeadline",
+              "fill": "#1A1A1A",
+              "content": "Analiza rutas de montaña con inteligencia artificial",
+              "textAlign": "center",
+              "fontFamily": "Newsreader",
+              "fontSize": 64,
+              "fontWeight": "500"
+            },
+            {
+              "type": "text",
+              "id": "21wTE",
+              "name": "heroSubline",
+              "fill": "#666666",
+              "content": "Obtén guías claras y responsables para tus rutas de senderismo, alpinismo y alta montaña. Priorizamos tu seguridad con análisis técnico preciso.",
+              "lineHeight": 1.5,
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 20,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "I4XtT",
+              "name": "heroCTAs",
+              "gap": 16,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "rsi78",
+                  "name": "ctaPrimary",
+                  "fill": "#0D6E6E",
+                  "cornerRadius": 8,
+                  "padding": [
+                    16,
+                    32
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "aYLah",
+                      "name": "ctaPrimaryText",
+                      "fill": "#FFFFFF",
+                      "content": "Analizar ruta",
+                      "fontFamily": "Inter",
+                      "fontSize": 16,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "1TF2o",
+                  "name": "ctaSecondary",
+                  "fill": "transparent",
+                  "cornerRadius": 8,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#E5E5E5"
+                  },
+                  "padding": [
+                    16,
+                    32
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "vjxCE",
+                      "name": "ctaSecondaryText",
+                      "fill": "#1A1A1A",
+                      "content": "Ver ejemplos",
+                      "fontFamily": "Inter",
+                      "fontSize": 16,
+                      "fontWeight": "500"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "qxQSN",
+              "name": "heroImage",
+              "width": 1000,
+              "height": 400,
+              "fill": "#F0F0F0",
+              "cornerRadius": 12,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#E5E5E5"
+              },
+              "children": [
+                {
+                  "type": "text",
+                  "id": "9rSOR",
+                  "name": "heroImageLabel",
+                  "fill": "#888888",
+                  "content": "Screenshot placeholder - Vista de análisis de ruta",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "rWwZl",
+          "name": "features",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 48,
+          "padding": [
+            80,
+            120
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "l97lu",
+              "name": "featuresTitle",
+              "fill": "#888888",
+              "content": "CÓMO FUNCIONA",
+              "fontFamily": "JetBrains Mono",
+              "fontSize": 11,
+              "fontWeight": "600",
+              "letterSpacing": 2
+            },
+            {
+              "type": "text",
+              "id": "3XV0H",
+              "name": "featuresSubtitle",
+              "fill": "#1A1A1A",
+              "content": "Análisis técnico en tres pasos",
+              "textAlign": "center",
+              "fontFamily": "Newsreader",
+              "fontSize": 40,
+              "fontWeight": "500"
+            },
+            {
+              "type": "frame",
+              "id": "6VY9X",
+              "name": "featuresGrid",
+              "width": "fill_container",
+              "gap": 32,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "p7F11",
+                  "name": "feature1",
+                  "width": "fill_container",
+                  "fill": "#FFFFFF",
+                  "cornerRadius": 12,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#E5E5E5"
+                  },
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": 32,
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "2dZCP",
+                      "name": "feature1Icon",
+                      "width": 48,
+                      "height": 48,
+                      "iconFontName": "upload",
+                      "iconFontFamily": "lucide",
+                      "fill": "#0D6E6E"
+                    },
+                    {
+                      "type": "text",
+                      "id": "EEcwM",
+                      "name": "feature1Title",
+                      "fill": "#1A1A1A",
+                      "content": "Sube tu ruta",
+                      "fontFamily": "Newsreader",
+                      "fontSize": 20,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "5UGuN",
+                      "name": "feature1Desc",
+                      "fill": "#666666",
+                      "content": "Carga tu archivo GPX o selecciona una ruta de nuestra base de datos. El proceso es rápido y seguro.",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "cKdFk",
+                  "name": "feature2",
+                  "width": "fill_container",
+                  "fill": "#FFFFFF",
+                  "cornerRadius": 12,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#E5E5E5"
+                  },
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": 32,
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "jniQE",
+                      "name": "feature2Icon",
+                      "width": 48,
+                      "height": 48,
+                      "iconFontName": "brain",
+                      "iconFontFamily": "lucide",
+                      "fill": "#0D6E6E"
+                    },
+                    {
+                      "type": "text",
+                      "id": "sBaEx",
+                      "name": "feature2Title",
+                      "fill": "#1A1A1A",
+                      "content": "Análisis con IA",
+                      "fontFamily": "Newsreader",
+                      "fontSize": 20,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "8oDEL",
+                      "name": "feature2Desc",
+                      "fill": "#666666",
+                      "content": "Nuestro sistema analiza distancia, desnivel, pendientes, exposición y clasifica la dificultad técnica.",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "5W0IT",
+                  "name": "feature3",
+                  "width": "fill_container",
+                  "fill": "#FFFFFF",
+                  "cornerRadius": 12,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#E5E5E5"
+                  },
+                  "layout": "vertical",
+                  "gap": 16,
+                  "padding": 32,
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "Hs4s7",
+                      "name": "feature3Icon",
+                      "width": 48,
+                      "height": 48,
+                      "iconFontName": "file-text",
+                      "iconFontFamily": "lucide",
+                      "fill": "#0D6E6E"
+                    },
+                    {
+                      "type": "text",
+                      "id": "EwF36",
+                      "name": "feature3Title",
+                      "fill": "#1A1A1A",
+                      "content": "Guía completa",
+                      "fontFamily": "Newsreader",
+                      "fontSize": 20,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "RIHij",
+                      "name": "feature3Desc",
+                      "fill": "#666666",
+                      "content": "Recibe una guía detallada con riesgos, terreno, nivel técnico y consejos prácticos para tu seguridad.",
+                      "lineHeight": 1.5,
+                      "fontFamily": "Inter",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "6uvuO",
+          "name": "ctaSection",
+          "width": "fill_container",
+          "fill": "#FFFFFF",
+          "layout": "vertical",
+          "gap": 32,
+          "padding": [
+            100,
+            120
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "SeJu8",
+              "name": "ctaSectionTitle",
+              "fill": "#1A1A1A",
+              "content": "Prepara tu próxima ruta con confianza",
+              "textAlign": "center",
+              "fontFamily": "Newsreader",
+              "fontSize": 48,
+              "fontWeight": "500"
+            },
+            {
+              "type": "text",
+              "id": "507iq",
+              "name": "ctaSectionDesc",
+              "fill": "#666666",
+              "content": "Únete a montañeros que valoran la información técnica y la seguridad",
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 18,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "2O07N",
+              "name": "ctaSectionButton",
+              "fill": "#0D6E6E",
+              "cornerRadius": 8,
+              "padding": [
+                16,
+                32
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "WDDeq",
+                  "name": "ctaSectionButtonText",
+                  "fill": "#FFFFFF",
+                  "content": "Comenzar ahora",
+                  "fontFamily": "Inter",
+                  "fontSize": 16,
+                  "fontWeight": "600"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "nmI0g",
+          "name": "footer",
+          "width": "fill_container",
+          "fill": "#1A1A1A",
+          "layout": "vertical",
+          "gap": 32,
+          "padding": [
+            60,
+            120
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "zhoDG",
+              "name": "footerContent",
+              "width": "fill_container",
+              "gap": 80,
+              "justifyContent": "space_between",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "kYs19",
+                  "name": "footerBrand",
+                  "width": 300,
+                  "layout": "vertical",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "ytz9P",
+                      "name": "footerLogo",
+                      "fill": "#FFFFFF",
+                      "content": "MontAIn",
+                      "fontFamily": "Inter",
+                      "fontSize": 20,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "dAj8V",
+                      "name": "footerTagline",
+                      "fill": "#AAAAAA",
+                      "content": "Análisis inteligente de rutas de montaña",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "zvnTb",
+                  "name": "footerLinks",
+                  "gap": 60,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "f128w",
+                      "name": "footerCol1",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "A9mzK",
+                          "name": "footerCol1Title",
+                          "fill": "#FFFFFF",
+                          "content": "Producto",
+                          "fontFamily": "Inter",
+                          "fontSize": 13,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "ZFvKS",
+                          "name": "footerCol1Link1",
+                          "fill": "#AAAAAA",
+                          "content": "Cómo funciona",
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "VoC2k",
+                          "name": "footerCol1Link2",
+                          "fill": "#AAAAAA",
+                          "content": "Ejemplos",
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "2Urwt",
+                      "name": "footerCol2",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "nE0rB",
+                          "name": "footerCol2Title",
+                          "fill": "#FFFFFF",
+                          "content": "Legal",
+                          "fontFamily": "Inter",
+                          "fontSize": 13,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "m9ZrV",
+                          "name": "footerCol2Link1",
+                          "fill": "#AAAAAA",
+                          "content": "Términos",
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "UN4WA",
+                          "name": "footerCol2Link2",
+                          "fill": "#AAAAAA",
+                          "content": "Privacidad",
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "nctYj",
+              "name": "footerBottom",
+              "width": "fill_container",
+              "stroke": {
+                "align": "inside",
+                "thickness": {
+                  "top": 1
+                },
+                "fill": "#333333"
+              },
+              "padding": [
+                32,
+                0,
+                0,
+                0
+              ],
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "UdOcW",
+                  "name": "footerCopyright",
+                  "fill": "#888888",
+                  "content": "© 2024 MontAIn. Todos los derechos reservados.",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "jjSFQ",
+      "x": 1587,
+      "y": -1053,
+      "name": "Carga de Ruta",
+      "width": 1200,
+      "fill": "#FAFAFA",
+      "placeholder": true,
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "OeKZw",
+          "name": "uploadHeader",
+          "width": "fill_container",
+          "height": 80,
+          "fill": "#FFFFFF",
+          "stroke": {
+            "align": "inside",
+            "thickness": {
+              "bottom": 1
+            },
+            "fill": "#E5E5E5"
+          },
+          "padding": [
+            0,
+            32
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "MKEpJ",
+              "name": "uploadLogo",
+              "fill": "#1A1A1A",
+              "content": "MontAIn",
+              "fontFamily": "Inter",
+              "fontSize": 20,
+              "fontWeight": "600"
+            },
+            {
+              "type": "frame",
+              "id": "EG93r",
+              "name": "uploadBack",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "SLXzy",
+                  "name": "uploadBackIcon",
+                  "width": 20,
+                  "height": 20,
+                  "iconFontName": "arrow-left",
+                  "iconFontFamily": "lucide",
+                  "fill": "#666666"
+                },
+                {
+                  "type": "text",
+                  "id": "PUyLB",
+                  "name": "uploadBackText",
+                  "fill": "#666666",
+                  "content": "Volver",
+                  "fontFamily": "Inter",
+                  "fontSize": 15,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "dlnQ7",
+          "name": "uploadContent",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 40,
+          "padding": [
+            60,
+            32
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "TTdMp",
+              "name": "uploadTitle",
+              "fill": "#1A1A1A",
+              "content": "Sube tu ruta GPX",
+              "textAlign": "center",
+              "fontFamily": "Newsreader",
+              "fontSize": 40,
+              "fontWeight": "500"
+            },
+            {
+              "type": "text",
+              "id": "HEBjW",
+              "name": "uploadSubtitle",
+              "fill": "#666666",
+              "content": "Carga un archivo GPX o selecciona una ruta de nuestra base de datos",
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 16,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "my0qB",
+              "name": "uploadArea",
+              "width": 600,
+              "height": 300,
+              "fill": "#FFFFFF",
+              "cornerRadius": 12,
+              "stroke": {
+                "align": "inside",
+                "thickness": 2,
+                "fill": "#E5E5E5"
+              },
+              "layout": "vertical",
+              "gap": 16,
+              "padding": 40,
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "UIuqG",
+                  "name": "uploadIcon",
+                  "width": 64,
+                  "height": 64,
+                  "iconFontName": "upload",
+                  "iconFontFamily": "lucide",
+                  "fill": "#0D6E6E"
+                },
+                {
+                  "type": "text",
+                  "id": "JjfJu",
+                  "name": "uploadAreaText",
+                  "fill": "#1A1A1A",
+                  "content": "Arrastra tu archivo GPX aquí",
+                  "fontFamily": "Inter",
+                  "fontSize": 18,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "r28Rz",
+                  "name": "uploadAreaSubtext",
+                  "fill": "#888888",
+                  "content": "o haz clic para seleccionar",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "NwkNc",
+              "name": "uploadOr",
+              "width": 600,
+              "gap": 16,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "X35nG",
+                  "name": "uploadOrLine",
+                  "width": "fill_container",
+                  "height": 1,
+                  "fill": "#E5E5E5"
+                },
+                {
+                  "type": "text",
+                  "id": "1zmAH",
+                  "name": "uploadOrText",
+                  "fill": "#888888",
+                  "content": "O",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "8qoxp",
+                  "name": "uploadOrLine2",
+                  "width": "fill_container",
+                  "height": 1,
+                  "fill": "#E5E5E5"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "j4YZe",
+              "name": "uploadBrowse",
+              "width": 600,
+              "fill": "#FFFFFF",
+              "cornerRadius": 12,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#E5E5E5"
+              },
+              "layout": "vertical",
+              "gap": 16,
+              "padding": 24,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "wndEG",
+                  "name": "uploadBrowseTitle",
+                  "fill": "#1A1A1A",
+                  "content": "Buscar en base de datos",
+                  "fontFamily": "Newsreader",
+                  "fontSize": 18,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "mPHH1",
+                  "name": "uploadBrowseDesc",
+                  "fill": "#666666",
+                  "content": "Explora rutas populares de senderismo y alpinismo",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "TRJrd",
+                  "name": "uploadBrowseButton",
+                  "width": "fill_container",
+                  "fill": "#0D6E6E",
+                  "cornerRadius": 8,
+                  "padding": [
+                    12,
+                    16
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "xoe9K",
+                      "name": "uploadBrowseButtonText",
+                      "fill": "#FFFFFF",
+                      "content": "Explorar rutas",
+                      "fontFamily": "Inter",
+                      "fontSize": 15,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "DYk44",
+      "x": 1587,
+      "y": 1511,
+      "name": "Análisis de Ruta",
+      "width": 1440,
+      "fill": "#FAFAFA",
+      "placeholder": true,
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "YaMVt",
+          "name": "analysisHeader",
+          "width": "fill_container",
+          "height": 80,
+          "fill": "#FFFFFF",
+          "stroke": {
+            "align": "inside",
+            "thickness": {
+              "bottom": 1
+            },
+            "fill": "#E5E5E5"
+          },
+          "padding": [
+            0,
+            32
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "5SkO9",
+              "name": "analysisLogo",
+              "fill": "#1A1A1A",
+              "content": "MontAIn",
+              "fontFamily": "Inter",
+              "fontSize": 20,
+              "fontWeight": "600"
+            },
+            {
+              "type": "frame",
+              "id": "R2S8Y",
+              "name": "analysisActions",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "J8bzn",
+                  "name": "analysisShare",
+                  "fill": "transparent",
+                  "cornerRadius": 8,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#E5E5E5"
+                  },
+                  "padding": [
+                    8,
+                    16
+                  ],
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "KPFSI",
+                      "name": "analysisShareIcon",
+                      "width": 18,
+                      "height": 18,
+                      "iconFontName": "share-2",
+                      "iconFontFamily": "lucide",
+                      "fill": "#666666"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "6pEDb",
+          "name": "analysisContent",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 32,
+          "padding": [
+            40,
+            32
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "D6gPS",
+              "name": "analysisTitle",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "vmXLF",
+                  "name": "analysisRouteName",
+                  "fill": "#1A1A1A",
+                  "content": "Pico del Teide - Ruta Normal",
+                  "fontFamily": "Newsreader",
+                  "fontSize": 36,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "ZyvG9",
+                  "name": "analysisRouteMeta",
+                  "fill": "#888888",
+                  "content": "Tenerife, Islas Canarias · Subida el 15/03/2024",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "CLUWK",
+              "name": "analysisMetrics",
+              "width": "fill_container",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "sNbk3",
+                  "name": "metricCard1",
+                  "width": "fill_container",
+                  "fill": "#FFFFFF",
+                  "cornerRadius": 12,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#E5E5E5"
+                  },
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": 24,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "f737d",
+                      "name": "metric1Label",
+                      "fill": "#888888",
+                      "content": "DISTANCIA",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 11,
+                      "fontWeight": "600",
+                      "letterSpacing": 2
+                    },
+                    {
+                      "type": "text",
+                      "id": "WtNP5",
+                      "name": "metric1Value",
+                      "fill": "#1A1A1A",
+                      "content": "18.5",
+                      "lineHeight": 0.85,
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 32,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "QIYqL",
+                      "name": "metric1Unit",
+                      "fill": "#666666",
+                      "content": "km",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "ZNq0E",
+                  "name": "metricCard2",
+                  "width": "fill_container",
+                  "fill": "#FFFFFF",
+                  "cornerRadius": 12,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#E5E5E5"
+                  },
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": 24,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "HVOXs",
+                      "name": "metric2Label",
+                      "fill": "#888888",
+                      "content": "DESNIVEL",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 11,
+                      "fontWeight": "600",
+                      "letterSpacing": 2
+                    },
+                    {
+                      "type": "text",
+                      "id": "ua0Hh",
+                      "name": "metric2Value",
+                      "fill": "#1A1A1A",
+                      "content": "+1,350",
+                      "lineHeight": 0.85,
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 32,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "zkTyU",
+                      "name": "metric2Unit",
+                      "fill": "#666666",
+                      "content": "m",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "s9OQ8",
+                  "name": "metricCard3",
+                  "width": "fill_container",
+                  "fill": "#FFFFFF",
+                  "cornerRadius": 12,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#E5E5E5"
+                  },
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": 24,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "A6Uvg",
+                      "name": "metric3Label",
+                      "fill": "#888888",
+                      "content": "DIFICULTAD",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 11,
+                      "fontWeight": "600",
+                      "letterSpacing": 2
+                    },
+                    {
+                      "type": "text",
+                      "id": "h0BLw",
+                      "name": "metric3Value",
+                      "fill": "#E07B54",
+                      "content": "ALTA",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 24,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Odjok",
+                      "name": "metric3Desc",
+                      "fill": "#666666",
+                      "content": "Alpinismo",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "bPxeA",
+              "name": "analysisChart",
+              "width": "fill_container",
+              "height": 400,
+              "fill": "#FFFFFF",
+              "cornerRadius": 12,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#E5E5E5"
+              },
+              "layout": "vertical",
+              "gap": 16,
+              "padding": 24,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "6FBZ8",
+                  "name": "chartTitle",
+                  "fill": "#888888",
+                  "content": "PERFIL DE ELEVACIÓN",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 11,
+                  "fontWeight": "600",
+                  "letterSpacing": 2
+                },
+                {
+                  "type": "frame",
+                  "id": "UvV1F",
+                  "name": "chartPlaceholder",
+                  "width": "fill_container",
+                  "height": "fill_container",
+                  "fill": "#F8F8F8",
+                  "cornerRadius": 8,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "2Sg4J",
+                      "name": "chartLabel",
+                      "fill": "#888888",
+                      "content": "Gráfica de elevación placeholder",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "3s4lB",
+              "name": "analysisRisks",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "PZAM7",
+                  "name": "risksTitle",
+                  "fill": "#888888",
+                  "content": "INDICADORES DE RIESGO",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 11,
+                  "fontWeight": "600",
+                  "letterSpacing": 2
+                },
+                {
+                  "type": "frame",
+                  "id": "OLSkJ",
+                  "name": "risksGrid",
+                  "width": "fill_container",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "D2M4M",
+                      "name": "riskCard1",
+                      "width": "fill_container",
+                      "fill": "#FFFFFF",
+                      "cornerRadius": 12,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#E5E5E5"
+                      },
+                      "layout": "vertical",
+                      "gap": 12,
+                      "padding": 20,
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "VJaPU",
+                          "name": "risk1Icon",
+                          "width": 24,
+                          "height": 24,
+                          "iconFontName": "trending-up",
+                          "iconFontFamily": "lucide",
+                          "fill": "#E07B54"
+                        },
+                        {
+                          "type": "text",
+                          "id": "UFVuC",
+                          "name": "risk1Label",
+                          "fill": "#1A1A1A",
+                          "content": "Pendiente",
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "uJhJD",
+                          "name": "risk1Value",
+                          "fill": "#666666",
+                          "content": "Media-Alta",
+                          "fontFamily": "Inter",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "4OiMe",
+                      "name": "riskCard2",
+                      "width": "fill_container",
+                      "fill": "#FFFFFF",
+                      "cornerRadius": 12,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#E5E5E5"
+                      },
+                      "layout": "vertical",
+                      "gap": 12,
+                      "padding": 20,
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "P00YK",
+                          "name": "risk2Icon",
+                          "width": 24,
+                          "height": 24,
+                          "iconFontName": "mountain",
+                          "iconFontFamily": "lucide",
+                          "fill": "#E07B54"
+                        },
+                        {
+                          "type": "text",
+                          "id": "mwMyk",
+                          "name": "risk2Label",
+                          "fill": "#1A1A1A",
+                          "content": "Exposición",
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "XGdmc",
+                          "name": "risk2Value",
+                          "fill": "#666666",
+                          "content": "Moderada",
+                          "fontFamily": "Inter",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "SbGTg",
+              "name": "analysisCTA",
+              "width": "fill_container",
+              "justifyContent": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "ZdKha",
+                  "name": "generateGuideBtn",
+                  "fill": "#0D6E6E",
+                  "cornerRadius": 8,
+                  "padding": [
+                    16,
+                    32
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "VGnYe",
+                      "name": "generateGuideBtnText",
+                      "fill": "#FFFFFF",
+                      "content": "Generar guía completa",
+                      "fontFamily": "Inter",
+                      "fontSize": 16,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "8JVwv",
+      "x": 1587,
+      "y": 0,
+      "name": "Guía Generada",
+      "width": 1440,
+      "fill": "#FAFAFA",
+      "placeholder": true,
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "el9RU",
+          "name": "guideHeader",
+          "width": "fill_container",
+          "height": 80,
+          "fill": "#FFFFFF",
+          "stroke": {
+            "align": "inside",
+            "thickness": {
+              "bottom": 1
+            },
+            "fill": "#E5E5E5"
+          },
+          "padding": [
+            0,
+            32
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "EsemG",
+              "name": "guideLogo",
+              "fill": "#1A1A1A",
+              "content": "MontAIn",
+              "fontFamily": "Inter",
+              "fontSize": 20,
+              "fontWeight": "600"
+            },
+            {
+              "type": "frame",
+              "id": "8taO7",
+              "name": "guideActions",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "6w1Rj",
+                  "name": "guideDownload",
+                  "fill": "transparent",
+                  "cornerRadius": 8,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#E5E5E5"
+                  },
+                  "gap": 8,
+                  "padding": [
+                    8,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "3paJV",
+                      "name": "guideDownloadIcon",
+                      "width": 18,
+                      "height": 18,
+                      "iconFontName": "download",
+                      "iconFontFamily": "lucide",
+                      "fill": "#666666"
+                    },
+                    {
+                      "type": "text",
+                      "id": "FvEB5",
+                      "name": "guideDownloadText",
+                      "fill": "#666666",
+                      "content": "Descargar PDF",
+                      "fontFamily": "Inter",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "9qdZK",
+          "name": "guideContent",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 32,
+          "padding": [
+            40,
+            32
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "OGqjY",
+              "name": "guideTitle",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 8,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "0gCf3",
+                  "name": "guideRouteName",
+                  "fill": "#1A1A1A",
+                  "content": "Guía de Ruta: Pico del Teide",
+                  "fontFamily": "Newsreader",
+                  "fontSize": 40,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "c6SOu",
+                  "name": "guideRouteMeta",
+                  "fill": "#888888",
+                  "content": "Generada el 15/03/2024 · Análisis técnico completo",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "7vFze",
+              "name": "guideSummary",
+              "width": "fill_container",
+              "fill": "#FFFFFF",
+              "cornerRadius": 12,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#E5E5E5"
+              },
+              "layout": "vertical",
+              "gap": 16,
+              "padding": 32,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "laQfJ",
+                  "name": "summaryTitle",
+                  "fill": "#888888",
+                  "content": "RESUMEN",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 11,
+                  "fontWeight": "600",
+                  "letterSpacing": 2
+                },
+                {
+                  "type": "text",
+                  "id": "kV7tk",
+                  "name": "summaryText",
+                  "fill": "#1A1A1A",
+                  "content": "Ruta de alpinismo de alta dificultad que asciende al punto más alto de España (3,718 m). La ruta presenta desniveles significativos, terreno volcánico y exposición moderada. Requiere experiencia en montaña y condiciones meteorológicas favorables.",
+                  "lineHeight": 1.6,
+                  "fontFamily": "Inter",
+                  "fontSize": 15,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "eIlQl",
+              "name": "guideTerrain",
+              "width": "fill_container",
+              "fill": "#FFFFFF",
+              "cornerRadius": 12,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#E5E5E5"
+              },
+              "layout": "vertical",
+              "gap": 16,
+              "padding": 32,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "9y98v",
+                  "name": "terrainTitle",
+                  "fill": "#888888",
+                  "content": "TERRENO",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 11,
+                  "fontWeight": "600",
+                  "letterSpacing": 2
+                },
+                {
+                  "type": "frame",
+                  "id": "cIMNL",
+                  "name": "terrainList",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 12,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "Nr74U",
+                      "name": "terrainItem1",
+                      "width": "fill_container",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "0faFm",
+                          "name": "terrainIcon1",
+                          "width": 6,
+                          "height": 6,
+                          "iconFontName": "circle",
+                          "iconFontFamily": "lucide",
+                          "fill": "#0D6E6E"
+                        },
+                        {
+                          "type": "text",
+                          "id": "n6j2X",
+                          "name": "terrainText1",
+                          "fill": "#1A1A1A",
+                          "content": "Sendero bien marcado en los primeros 2 km",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Inter",
+                          "fontSize": 15,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "IpmBt",
+                      "name": "terrainItem2",
+                      "width": "fill_container",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "qtBFH",
+                          "name": "terrainIcon2",
+                          "width": 6,
+                          "height": 6,
+                          "iconFontName": "circle",
+                          "iconFontFamily": "lucide",
+                          "fill": "#0D6E6E"
+                        },
+                        {
+                          "type": "text",
+                          "id": "XAMLu",
+                          "name": "terrainText2",
+                          "fill": "#1A1A1A",
+                          "content": "Terreno volcánico con roca suelta a partir de 2,500 m",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Inter",
+                          "fontSize": 15,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "9BkJD",
+                      "name": "terrainItem3",
+                      "width": "fill_container",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "cxbRG",
+                          "name": "terrainIcon3",
+                          "width": 6,
+                          "height": 6,
+                          "iconFontName": "circle",
+                          "iconFontFamily": "lucide",
+                          "fill": "#0D6E6E"
+                        },
+                        {
+                          "type": "text",
+                          "id": "2rUZu",
+                          "name": "terrainText3",
+                          "fill": "#1A1A1A",
+                          "content": "Zonas de nieve y hielo posibles en invierno",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Inter",
+                          "fontSize": 15,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Kmpkg",
+              "name": "guideTechnical",
+              "width": "fill_container",
+              "fill": "#FFFFFF",
+              "cornerRadius": 12,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#E5E5E5"
+              },
+              "layout": "vertical",
+              "gap": 16,
+              "padding": 32,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "BdtSc",
+                  "name": "technicalTitle",
+                  "fill": "#888888",
+                  "content": "NIVEL TÉCNICO",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 11,
+                  "fontWeight": "600",
+                  "letterSpacing": 2
+                },
+                {
+                  "type": "frame",
+                  "id": "enVzJ",
+                  "name": "technicalContent",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "Rcm1n",
+                      "name": "technicalLevel",
+                      "width": "fill_container",
+                      "gap": 16,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "DHQVl",
+                          "name": "technicalBadge",
+                          "fill": "#E07B54",
+                          "cornerRadius": 6,
+                          "padding": [
+                            8,
+                            16
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "tF4MX",
+                              "name": "technicalBadgeText",
+                              "fill": "#FFFFFF",
+                              "content": "ALTA",
+                              "fontFamily": "JetBrains Mono",
+                              "fontSize": 13,
+                              "fontWeight": "700"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "ntk4N",
+                          "name": "technicalDesc",
+                          "fill": "#1A1A1A",
+                          "content": "Alpinismo - Requiere experiencia previa",
+                          "fontFamily": "Inter",
+                          "fontSize": 15,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "7YtGe",
+                      "name": "technicalSkills",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "YA33o",
+                          "name": "technicalSkillsTitle",
+                          "fill": "#666666",
+                          "content": "Habilidades requeridas:",
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "aUa11",
+                          "name": "technicalSkillsList",
+                          "fill": "#1A1A1A",
+                          "content": "• Orientación en montaña • Manejo de crampones y piolet • Condición física excelente • Conocimiento de meteorología",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "AilFm",
+              "name": "guideRisks",
+              "width": "fill_container",
+              "fill": "#FFFFFF",
+              "cornerRadius": 12,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#E5E5E5"
+              },
+              "layout": "vertical",
+              "gap": 16,
+              "padding": 32,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "sqURz",
+                  "name": "risksTitle",
+                  "fill": "#888888",
+                  "content": "RIESGOS Y PRECAUCIONES",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 11,
+                  "fontWeight": "600",
+                  "letterSpacing": 2
+                },
+                {
+                  "type": "frame",
+                  "id": "TqIfi",
+                  "name": "risksList",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "aLiki",
+                      "name": "riskItem1",
+                      "width": "fill_container",
+                      "fill": "#FFF8F5",
+                      "cornerRadius": 8,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#E07B54"
+                      },
+                      "layout": "vertical",
+                      "gap": 8,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "jg97M",
+                          "name": "riskItem1Title",
+                          "width": "fill_container",
+                          "gap": 8,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon_font",
+                              "id": "8vkuR",
+                              "name": "riskItem1Icon",
+                              "width": 20,
+                              "height": 20,
+                              "iconFontName": "alert",
+                              "iconFontFamily": "lucide",
+                              "fill": "#E07B54"
+                            },
+                            {
+                              "type": "text",
+                              "id": "7kzdZ",
+                              "name": "riskItem1Label",
+                              "fill": "#1A1A1A",
+                              "content": "Mal de altura",
+                              "fontFamily": "Newsreader",
+                              "fontSize": 16,
+                              "fontWeight": "500"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "WGEUG",
+                          "name": "riskItem1Text",
+                          "fill": "#666666",
+                          "content": "La altitud de 3,718 m puede causar síntomas de mal de altura. Aclimatación previa recomendada.",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "g8TMa",
+                      "name": "riskItem2",
+                      "width": "fill_container",
+                      "fill": "#FFF8F5",
+                      "cornerRadius": 8,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#E07B54"
+                      },
+                      "layout": "vertical",
+                      "gap": 8,
+                      "padding": 16,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "sKHG0",
+                          "name": "riskItem2Title",
+                          "width": "fill_container",
+                          "gap": 8,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon_font",
+                              "id": "wbCkh",
+                              "name": "riskItem2Icon",
+                              "width": 20,
+                              "height": 20,
+                              "iconFontName": "alert",
+                              "iconFontFamily": "lucide",
+                              "fill": "#E07B54"
+                            },
+                            {
+                              "type": "text",
+                              "id": "2swoE",
+                              "name": "riskItem2Label",
+                              "fill": "#1A1A1A",
+                              "content": "Condiciones meteorológicas",
+                              "fontFamily": "Newsreader",
+                              "fontSize": 16,
+                              "fontWeight": "500"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "doZMV",
+                          "name": "riskItem2Text",
+                          "fill": "#666666",
+                          "content": "Viento fuerte y cambios bruscos de tiempo son frecuentes. Consultar pronóstico antes de salir.",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "YbP7t",
+              "name": "guideTips",
+              "width": "fill_container",
+              "fill": "#FFFFFF",
+              "cornerRadius": 12,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#E5E5E5"
+              },
+              "layout": "vertical",
+              "gap": 16,
+              "padding": 32,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "fcLUN",
+                  "name": "tipsTitle",
+                  "fill": "#888888",
+                  "content": "CONSEJOS PRÁCTICOS",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 11,
+                  "fontWeight": "600",
+                  "letterSpacing": 2
+                },
+                {
+                  "type": "frame",
+                  "id": "x0NxZ",
+                  "name": "tipsList",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 12,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "InWi7",
+                      "name": "tipItem1",
+                      "width": "fill_container",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "CQL3W",
+                          "name": "tipIcon1",
+                          "width": 20,
+                          "height": 20,
+                          "iconFontName": "check",
+                          "iconFontFamily": "lucide",
+                          "fill": "#0D6E6E"
+                        },
+                        {
+                          "type": "text",
+                          "id": "JJvdO",
+                          "name": "tipText1",
+                          "fill": "#1A1A1A",
+                          "content": "Salir temprano (antes de las 6:00) para evitar el calor y tener tiempo suficiente",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Inter",
+                          "fontSize": 15,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "jRamr",
+                      "name": "tipItem2",
+                      "width": "fill_container",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "JpYKs",
+                          "name": "tipIcon2",
+                          "width": 20,
+                          "height": 20,
+                          "iconFontName": "check",
+                          "iconFontFamily": "lucide",
+                          "fill": "#0D6E6E"
+                        },
+                        {
+                          "type": "text",
+                          "id": "TbhvZ",
+                          "name": "tipText2",
+                          "fill": "#1A1A1A",
+                          "content": "Llevar suficiente agua (mínimo 2 litros) y protección solar",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Inter",
+                          "fontSize": 15,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "V6ODm",
+                      "name": "tipItem3",
+                      "width": "fill_container",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "LlO0r",
+                          "name": "tipIcon3",
+                          "width": 20,
+                          "height": 20,
+                          "iconFontName": "check",
+                          "iconFontFamily": "lucide",
+                          "fill": "#0D6E6E"
+                        },
+                        {
+                          "type": "text",
+                          "id": "HivW2",
+                          "name": "tipText3",
+                          "fill": "#1A1A1A",
+                          "content": "Permiso necesario: solicitar con antelación en el Parque Nacional",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Inter",
+                          "fontSize": 15,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "M08LJ",
+      "x": 3157,
+      "y": 1511,
+      "name": "Análisis de Ruta - Móvil",
+      "width": 375,
+      "fill": "#FAFAFA",
+      "placeholder": true,
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "ZM9Tf",
+          "name": "mobileHeader",
+          "width": "fill_container",
+          "height": 64,
+          "fill": "#FFFFFF",
+          "stroke": {
+            "align": "inside",
+            "thickness": {
+              "bottom": 1
+            },
+            "fill": "#E5E5E5"
+          },
+          "padding": [
+            0,
+            16
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "icon_font",
+              "id": "jHIRz",
+              "name": "mobileBack",
+              "width": 24,
+              "height": 24,
+              "iconFontName": "arrow-left",
+              "iconFontFamily": "lucide",
+              "fill": "#666666"
+            },
+            {
+              "type": "text",
+              "id": "Nd6aV",
+              "name": "mobileLogo",
+              "fill": "#1A1A1A",
+              "content": "MontAIn",
+              "fontFamily": "Inter",
+              "fontSize": 18,
+              "fontWeight": "600"
+            },
+            {
+              "type": "icon_font",
+              "id": "RPGqv",
+              "name": "mobileShare",
+              "width": 24,
+              "height": 24,
+              "iconFontName": "share-2",
+              "iconFontFamily": "lucide",
+              "fill": "#666666"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "ux6U3",
+          "name": "mobileContent",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 24,
+          "padding": [
+            24,
+            16
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "eN4XO",
+              "name": "mobileTitle",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 6,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "hOkTC",
+                  "name": "mobileRouteName",
+                  "fill": "#1A1A1A",
+                  "content": "Pico del Teide - Ruta Normal",
+                  "fontFamily": "Newsreader",
+                  "fontSize": 28,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "s1WfK",
+                  "name": "mobileRouteMeta",
+                  "fill": "#888888",
+                  "content": "Tenerife, Islas Canarias",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "R35Js",
+              "name": "mobileMetrics",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 12,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "HLhfx",
+                  "name": "mobileMetric1",
+                  "width": "fill_container",
+                  "fill": "#FFFFFF",
+                  "cornerRadius": 12,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#E5E5E5"
+                  },
+                  "layout": "vertical",
+                  "gap": 6,
+                  "padding": 20,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "orGFZ",
+                      "name": "mobileMetric1Label",
+                      "fill": "#888888",
+                      "content": "DISTANCIA",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 10,
+                      "fontWeight": "600",
+                      "letterSpacing": 2
+                    },
+                    {
+                      "type": "text",
+                      "id": "4nCCP",
+                      "name": "mobileMetric1Value",
+                      "fill": "#1A1A1A",
+                      "content": "18.5 km",
+                      "lineHeight": 0.85,
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 28,
+                      "fontWeight": "700"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "eDIbu",
+                  "name": "mobileMetric2",
+                  "width": "fill_container",
+                  "fill": "#FFFFFF",
+                  "cornerRadius": 12,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#E5E5E5"
+                  },
+                  "layout": "vertical",
+                  "gap": 6,
+                  "padding": 20,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "uTgkc",
+                      "name": "mobileMetric2Label",
+                      "fill": "#888888",
+                      "content": "DESNIVEL",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 10,
+                      "fontWeight": "600",
+                      "letterSpacing": 2
+                    },
+                    {
+                      "type": "text",
+                      "id": "SnvhP",
+                      "name": "mobileMetric2Value",
+                      "fill": "#1A1A1A",
+                      "content": "+1,350 m",
+                      "lineHeight": 0.85,
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 28,
+                      "fontWeight": "700"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "tn64B",
+                  "name": "mobileMetric3",
+                  "width": "fill_container",
+                  "fill": "#FFFFFF",
+                  "cornerRadius": 12,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#E5E5E5"
+                  },
+                  "layout": "vertical",
+                  "gap": 6,
+                  "padding": 20,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "dvtfD",
+                      "name": "mobileMetric3Label",
+                      "fill": "#888888",
+                      "content": "DIFICULTAD",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 10,
+                      "fontWeight": "600",
+                      "letterSpacing": 2
+                    },
+                    {
+                      "type": "text",
+                      "id": "AQt3Q",
+                      "name": "mobileMetric3Value",
+                      "fill": "#E07B54",
+                      "content": "ALTA",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 22,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "c4n9A",
+                      "name": "mobileMetric3Desc",
+                      "fill": "#666666",
+                      "content": "Alpinismo",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Y1H72",
+              "name": "mobileChart",
+              "width": "fill_container",
+              "height": 250,
+              "fill": "#FFFFFF",
+              "cornerRadius": 12,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#E5E5E5"
+              },
+              "layout": "vertical",
+              "gap": 12,
+              "padding": 20,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "tOKOW",
+                  "name": "mobileChartTitle",
+                  "fill": "#888888",
+                  "content": "PERFIL DE ELEVACIÓN",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 10,
+                  "fontWeight": "600",
+                  "letterSpacing": 2
+                },
+                {
+                  "type": "frame",
+                  "id": "gJLxN",
+                  "name": "mobileChartPlaceholder",
+                  "width": "fill_container",
+                  "height": "fill_container",
+                  "fill": "#F8F8F8",
+                  "cornerRadius": 8,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "6izH5",
+                      "name": "mobileChartLabel",
+                      "fill": "#888888",
+                      "content": "Gráfica de elevación",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "jbRP9",
+              "name": "mobileRisks",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 12,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "ZpM5H",
+                  "name": "mobileRisksTitle",
+                  "fill": "#888888",
+                  "content": "INDICADORES DE RIESGO",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 10,
+                  "fontWeight": "600",
+                  "letterSpacing": 2
+                },
+                {
+                  "type": "frame",
+                  "id": "N5y1t",
+                  "name": "mobileRisksList",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 12,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "ckZI3",
+                      "name": "mobileRisk1",
+                      "width": "fill_container",
+                      "fill": "#FFFFFF",
+                      "cornerRadius": 12,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#E5E5E5"
+                      },
+                      "gap": 12,
+                      "padding": 16,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "D5Ufn",
+                          "name": "mobileRisk1Icon",
+                          "width": 20,
+                          "height": 20,
+                          "iconFontName": "trending-up",
+                          "iconFontFamily": "lucide",
+                          "fill": "#E07B54"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "YxSTT",
+                          "name": "mobileRisk1Content",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 4,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "I4co4",
+                              "name": "mobileRisk1Label",
+                              "fill": "#1A1A1A",
+                              "content": "Pendiente",
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "text",
+                              "id": "SObAN",
+                              "name": "mobileRisk1Value",
+                              "fill": "#666666",
+                              "content": "Media-Alta",
+                              "fontFamily": "Inter",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "yBb3D",
+                      "name": "mobileRisk2",
+                      "width": "fill_container",
+                      "fill": "#FFFFFF",
+                      "cornerRadius": 12,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "#E5E5E5"
+                      },
+                      "gap": 12,
+                      "padding": 16,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "8tmKb",
+                          "name": "mobileRisk2Icon",
+                          "width": 20,
+                          "height": 20,
+                          "iconFontName": "mountain",
+                          "iconFontFamily": "lucide",
+                          "fill": "#E07B54"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "E6QXB",
+                          "name": "mobileRisk2Content",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 4,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "1YPkh",
+                              "name": "mobileRisk2Label",
+                              "fill": "#1A1A1A",
+                              "content": "Exposición",
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "500"
+                            },
+                            {
+                              "type": "text",
+                              "id": "7I72w",
+                              "name": "mobileRisk2Value",
+                              "fill": "#666666",
+                              "content": "Moderada",
+                              "fontFamily": "Inter",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "glYNM",
+              "name": "mobileCTA",
+              "width": "fill_container",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "lqaZK",
+                  "name": "mobileGenerateBtn",
+                  "width": "fill_container",
+                  "fill": "#0D6E6E",
+                  "cornerRadius": 8,
+                  "padding": [
+                    16,
+                    24
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "WsqsU",
+                      "name": "mobileGenerateBtnText",
+                      "fill": "#FFFFFF",
+                      "content": "Generar guía completa",
+                      "fontFamily": "Inter",
+                      "fontSize": 16,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

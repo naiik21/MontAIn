@@ -391,6 +391,7 @@ def build_dataset(gpx_dir="data/gpx"):
     rows = []
 
     for path in glob.glob(f"{gpx_dir}/*.gpx" ):
+        print(path)
         df, name = load_gpx(path)
         df = enrich_features(df)
         row = {}
