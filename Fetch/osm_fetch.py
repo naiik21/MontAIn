@@ -3,7 +3,8 @@ import requests
 OVERPASS_URL = "https://overpass-api.de/api/interpreter"
 
 
-def fetch_hiking_routes(bbox, limit=1000):
+
+def fetch_hiking_routes(bbox, limit=5000):
     """
     bbox = (south, west, north, east)
     """
@@ -12,6 +13,7 @@ def fetch_hiking_routes(bbox, limit=1000):
     (
       relation["route"="hiking"]({bbox[0]},{bbox[1]},{bbox[2]},{bbox[3]});
       relation["route"="climbing"]({bbox[0]},{bbox[1]},{bbox[2]},{bbox[3]});
+
     );
     out body {limit};
     >;
