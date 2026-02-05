@@ -9,10 +9,10 @@ def fetch_hiking_routes(bbox, limit=5000):
     bbox = (south, west, north, east)
     """
     query = f"""
-    [out:json][timeout:300];
+    [out:json][timeout:25];
     (
-      relation["route"="hiking"]["name"]["network"~"^(iwn|nwn|rwn)$"]({bbox[0]},{bbox[1]},{bbox[2]},{bbox[3]});
-      relation["route"="climbing"]["name"]({bbox[0]},{bbox[1]},{bbox[2]},{bbox[3]});
+      relation["route"="hiking"]({bbox[0]},{bbox[1]},{bbox[2]},{bbox[3]});
+      relation["route"="climbing"]({bbox[0]},{bbox[1]},{bbox[2]},{bbox[3]});
 
     );
     out body {limit};
