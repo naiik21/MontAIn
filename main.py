@@ -1,110 +1,101 @@
 import os
+import tempfile
+
+from fastapi import FastAPI, File, UploadFile, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 import json
-import numpy as np
-import pandas as pd
-import Fetch.osm_fetch as osm
-import Fetch.osm_to_gpx as gpx
-from GPX_uses.gpx_loader import load_gpx
-import datasetter
-from GPX_uses.gpx_reloader import reloader_gpx
-from models.NeuronalNetwork import model_training
-from models.xgboost import xgboost
-from models.xgboost_regresion import xgboost_regresion
-from models.baseline import baseline
+import datasetter 
+import api.map as map
 
 
+# Inicializar FastAPI
+app = FastAPI(
+    title="MontAIn API",
+    description="API para análisis de rutas de montaña usando IA",
+    version="1.0.0",
+)
 
-def save_all_routes(osm_data, output_dir="data/gpx"):
+# Configurar CORS para permitir requests del frontend
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:4321",
+        "http://localhost:3000",
+        "http://127.0.0.1:4321",
+    ],  # Astro dev server
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+@app.get("/")
+async def root():
+    """Endpoint raíz sencillo"""
+    return {"message": "MontAIn API en ejecución"}
+
+
+@app.get("/health")
+async def health_check():
+    """Health check endpoint"""
+    return {
+        "status": "healthy",
+    }
+
+
+@app.post("/process-gpx")
+async def process_gpx(file: UploadFile = File(...)):
     """
-    Guarda todas las rutas como archivos GPX individuales
+    Recibe un archivo GPX subido, lo procesa con build_dataset_from_file
+    y devuelve el resultado como JSON (una sola ruta).
     """
-    os.makedirs(output_dir, exist_ok=True)
+    if not file.filename.endswith(".gpx"):
+        raise HTTPException(
+            status_code=400,
+            detail="El archivo debe ser un GPX (.gpx)",
+        )
 
-    # Crear diccionarios de nodos y ways para acceso rápido
-    nodes_dict = {}
-    ways_dict = {}
-    relations = []
-    
-    for element in osm_data["elements"]:
-        elem_type = element["type"]
-        elem_id = element["id"]
+    # Guardar el archivo en un temporal para pasarlo a build_dataset_from_file
+    tmp_path = None
+    try:
+        contents = await file.read()
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".gpx") as tmp:
+            tmp.write(contents)
+            tmp_path = tmp.name
+
+        map_html = map.get_map(tmp_path)
+        elevation_plot = map.get_elevation(tmp_path)
+        # Usar el flujo existente de datasetter para un solo archivo
+        df = datasetter.build_dataset_from_file(tmp_path)
+        # Convertir DataFrame a lista de diccionarios (orient='records' devuelve una lista)
+        records = df.to_dict(orient='records')
         
-        if elem_type == "node":
-            nodes_dict[elem_id] = element
-        elif elem_type == "way":
-            ways_dict[elem_id] = element
-        elif elem_type == "relation":
-            relations.append(element)
+        # Devolver directamente la lista, FastAPI la serializa automáticamente
 
-    # Procesar cada relación
-    count = 0
-    for relation in relations:
-        route_id = relation["id"]
-        route_name = relation.get("tags", {}).get("name", f"route_{route_id}")
-        
-        # Sanitizar nombre para archivo
-        safe_name = "".join(c for c in route_name if c.isalnum() or c in (' ', '-', '_')).strip()
-        safe_name = safe_name[:50]  # Limitar longitud
-        
-        path = f"{output_dir}/{safe_name}_{route_id}.gpx"
+        return JSONResponse(content={
+            'data': records,
+            'map_html': map_html,
+            'elevation_plot': elevation_plot
+        })
 
-        try:
-            gpx.osm_relation_to_gpx(relation, nodes_dict, ways_dict, path)
-            count += 1
-            print(f"✓ Guardada: {route_name}")
-        except Exception as e:
-            print(f"✗ Error en {route_name}: {e}")
-
-    print(f"\n🎉 Guardadas {count} rutas en {output_dir}/")
-    return count
+    except Exception as e:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Error al procesar el GPX: {e}",
+        )
+    finally:
+        if tmp_path and os.path.exists(tmp_path):
+            try:
+                os.unlink(tmp_path)
+            except OSError:
+                pass
 
 
-def save_dataset_to_csv(gpx_dir="data/gpx", output_file="dataset.csv"):
-    """
-    Crea el dataset y lo guarda en un archivo CSV
-    """
-    # Crear el dataset
-    dataset = datasetter.build_dataset(gpx_dir=gpx_dir)
-    
-    # Guardar en CSV
-    dataset.to_csv(output_file, index=False, encoding='utf-8')
-    
-    return dataset
-
-
-
-def main():  
-    pirineos=(42.2, 0.5, 43.3, 2.3)
-    picos_europa= (43.1, -5.0, 43.3, -4.7)
-    sierra_nevada= (36.9, -3.5, 37.1, -3.3)
-    gredos= (40.2, -5.3, 40.4, -5.0)
-    teide= (28.2, -16.7, 28.3, -16.6)
-    montseny= (41.7, 2.3, 41.8, 2.5)
-    alpes= (45.8, 6.8, 46.0, 7.0)
-    himalaya=(27.9, 86.8, 28.1, 87.0)
-    montanas_rocosas=(39.0, -106.5, 39.5, -105.5)
-    andes=(-33.0, -70.0, -32.5, -69.5)
-    kilimanjaro=(-3.1, 37.3, -3.0, 37.4)
-    matterhorn=(45.9, 7.6, 46.0, 7.7)
-    atlas=(31.0, -8.0, 31.5, -7.5)
-
-    # print("Descargando rutas")
-    # osm_data = osm.fetch_hiking_routes(pirineos)
-
-    # print(f"📦 Recibidos {len(osm_data['elements'])} elementos")
-
-    # print("\nGuardando rutas como GPX")
-    # save_all_routes(osm_data, output_dir="data/gpx")
-
-    # print("\nCreando CSV del dataset")
-    # save_dataset_to_csv(gpx_dir="data/gpx", output_file="bigDataset.csv")
-    
-    print("\nEntrenando modelo")
-    baseline(dataset_path="bigDataset.csv", test_size=0.25, random_state=42, show_plots=True)
-    xgboost(dataset_path="bigDataset.csv", test_size=0.25, random_state=42, show_plots=True)
-    xgboost_regresion(dataset_path="bigDataset.csv", test_size=0.25, random_state=42)
-   
-    # print("\nModelo entrenado")
-    print("\nProceso finalizado")
 if __name__ == "__main__":
-    main()
+    import uvicorn
+
+    print("🚀 Iniciando servidor MontAIn API...")
+    print("📡 Servidor disponible en http://localhost:8000")
+    print("📚 Documentación en http://localhost:8000/docs")
+    uvicorn.run(app, host="0.0.0.0", port=8000)

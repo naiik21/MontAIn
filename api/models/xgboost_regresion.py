@@ -76,6 +76,9 @@ def xgboost_regresion(dataset_path="./dataset.csv", test_size=0.25, random_state
 
     reg_model.fit(X_train, y_train)
 
+    # print("--------------------------------")
+    # print(X_test)
+    # print("--------------------------------")
     # =====================
     # 3. Predicción continua
     # =====================
@@ -95,7 +98,7 @@ def xgboost_regresion(dataset_path="./dataset.csv", test_size=0.25, random_state
     print(classification_report(y_test, y_pred_class))
 
 
-    reg_model.save_model('xgboost_regresion.model')
+    # reg_model.save_model('xgboost_regresion.json')
     
     return {
         "model": reg_model,

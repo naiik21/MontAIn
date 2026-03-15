@@ -1,4 +1,27 @@
+# Entornos virtuales Python
 .venv
-data
 venv
-__pycache__
+api/.venv
+
+# Cachés de Python
+__pycache__/
+*.pyc
+
+# Variables de entorno (nunca a git)
+.env
+api/.env
+front/.env
+front\node_modules
+
+# Datos pesados / locales
+data/
+bigDataset.csv
+dataset.csv
+
+# Node (frontend)
+front/node_modules
+front/.vercel
+
+# Otros típicos
+.DS_Store
+*.log

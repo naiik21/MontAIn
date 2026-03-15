@@ -3,7 +3,8 @@ from geopy.distance import geodesic
 import pandas as pd
 import glob
 from GPX_uses.gpx_loader import load_gpx
-
+import xgboost as xgb
+import math
 
 def compute_distances(df):
     """
@@ -404,3 +405,51 @@ def build_dataset(gpx_dir="data/gpx"):
     print(rows)
         
     return pd.DataFrame(rows)
+
+
+
+def redondear_personalizado(numero):
+    parte_entera = math.floor(numero)
+    parte_decimal = numero - parte_entera
+    
+    if parte_decimal > 0.8:
+        return math.ceil(numero)  # Redondear hacia arriba
+    else:
+        return math.floor(numero)  # Redondear hacia abajo
+
+def set_difficulty_with_model(features):
+    model_xgb = xgb.Booster()
+    model_xgb.load_model("xgboost_regresion.json")
+    features_array = np.array(list(features.values())).reshape(1, -1)
+    # Convertir el array a DMatrix
+    dmatrix = xgb.DMatrix(features_array, feature_names=list(features.keys()))
+    difficulty = model_xgb.predict(dmatrix)
+
+    difficulty_rounded = redondear_personalizado(difficulty[0])
+
+    difficulty_name=get_difficulty_name(difficulty_rounded)
+
+    return difficulty_name
+
+
+def build_dataset_from_file(gpx_path: str) -> pd.DataFrame:
+    """
+    Versión de build_dataset para un único archivo GPX.
+
+    Parámetros:
+    - gpx_path: ruta al archivo .gpx
+
+    Retorna:
+    - DataFrame de una sola fila con:
+      filename, todas las features agregadas y la columna difficulty.
+    """
+    print(gpx_path)
+    df, name = load_gpx(gpx_path)
+    df = enrich_features(df)
+
+    row = {"filename": name}
+    features = aggregate_route_features(df)
+    row.update(features)
+    row["difficulty"] = set_difficulty_with_model(features)
+
+    return pd.DataFrame([row])

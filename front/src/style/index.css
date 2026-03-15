@@ -1,0 +1,123 @@
+ .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-family: 'Newsreader', serif;
+      font-size: 40px;
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: #1a1a1a;
+    }
+
+    .subtitle {
+      color: #666666;
+      font-size: 16px;
+      margin-bottom: 32px;
+    }
+
+    .upload-section {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      gap: 15px;
+      background: #ffffff;
+      border: 2px dashed #e5e5e5;
+      border-radius: 12px;
+      padding: 40px 25%;
+      text-align: center;
+      margin-bottom: 32px;
+      transition: border-color 0.3s;
+    }
+
+    .upload-section:hover {
+      border-color: #0d6e6e;
+    }
+
+    .upload-section.dragover {
+      border-color: #0d6e6e;
+      background: #f0f9f9;
+    }
+
+    input[type='file'] {
+      display: none;
+    }
+
+    .file-label {
+      display: inline-block;
+      padding: 16px 32px;
+      background: #0d6e6e;
+      color: #ffffff;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 16px;
+      transition: background 0.3s;
+    }
+
+    .file-label:hover {
+      background: #0a5a5a;
+    }
+
+    .file-name {
+      color: #666666;
+      font-size: 14px;
+    }
+
+    button {
+      padding: 16px 32px;
+      background: #0d6e6e;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover:not(:disabled) {
+      background: #0a5a5a;
+    }
+
+    button:disabled {
+      background: #aaaaaa;
+      cursor: not-allowed;
+    }
+
+    .loading {
+      display: none;
+      text-align: center;
+      padding: 20px;
+      color: #666666;
+    }
+
+    .loading.active {
+      display: block;
+    }
+
+    .section {
+      background: #ffffff;
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .section-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      color: #888888;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+
+    .data-section {	
+      display: flex;
+      flex-direction: row;
+      gap: 24px;
+    }
