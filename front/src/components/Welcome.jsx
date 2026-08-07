@@ -20,6 +20,7 @@ export function Welcome() {
     gpxData,
     mapHtml,
     elevationPlot,
+    description,
     processFile,
     clearError
   } = useGPXProcessor()
@@ -59,7 +60,7 @@ export function Welcome() {
       <LoadingIndicator isLoading={isLoading} />
       <ErrorMessage error={error} />
       <div className='section data-section'>
-        <GPXDetails gpxData={gpxData} />
+        <GPXDetails gpxData={gpxData} description={description} />
         <div>
           <MapFrame mapHtml={mapHtml} />
           <ElevationChart elevationData={elevationPlot} />

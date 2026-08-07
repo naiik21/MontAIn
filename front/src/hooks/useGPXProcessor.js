@@ -12,6 +12,7 @@ export function useGPXProcessor() {
   const [gpxData, setGpxData] = useState(null)
   const [mapHtml, setMapHtml] = useState(null)
   const [elevationPlot, setElevationPlot] = useState(null)
+  const [description, setDescription] = useState(null)
   const clearError = () => {
     setError(null)
   }
@@ -49,6 +50,7 @@ export function useGPXProcessor() {
       setGpxData(processedData)
       setMapHtml(mapHtml)
       setElevationPlot(elevationPlot)
+      setDescription(data.description ?? null)
     } catch (err) {
       const errorMessage =
         err.message ||
@@ -67,6 +69,7 @@ export function useGPXProcessor() {
     gpxData,
     mapHtml,
     elevationPlot,
+    description,
     processFile,
     clearError
   }

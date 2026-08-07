@@ -1,12 +1,19 @@
 import os
 import tempfile
+from dotenv import load_dotenv
+load_dotenv()
 
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
-import json
-import datasetter 
+import datasetter
 import api.map as map
+import description.route_guide as route_guide
+import description.build_compute as build_compute
+import description.detection_events as detection_events
+import description.key_moments as key_moment
+import description.anthropic_claude as anthropic_claude
+from GPX_uses.gpx_loader import gpx_to_dataframe
 
 
 # Inicializar FastAPI
@@ -66,17 +73,50 @@ async def process_gpx(file: UploadFile = File(...)):
 
         map_html = map.get_map(tmp_path)
         elevation_plot = map.get_elevation(tmp_path)
-        # Usar el flujo existente de datasetter para un solo archivo
+
+        # Features agregadas + dificultad
         df = datasetter.build_dataset_from_file(tmp_path)
-        # Convertir DataFrame a lista de diccionarios (orient='records' devuelve una lista)
         records = df.to_dict(orient='records')
-        
-        # Devolver directamente la lista, FastAPI la serializa automáticamente
+        record = records[0]
+
+        # Pipeline de descripción con IA
+        df_points = gpx_to_dataframe(tmp_path)
+        df_points = build_compute.build_features(df_points)
+        events = detection_events.extract_route_events(df_points)
+        key_moment.compute_fatigue_score(df_points)
+        key_moments = key_moment.detect_key_moments(df_points)
+
+        route_dict = {k: v for k, v in record.items() if k not in ("filename", "difficulty")}
+        guide = route_guide.generate_route_guide(route_dict, [record["difficulty"]])
+
+        prompt = f"""
+Eres un guía de montaña profesional.
+Redacta una descripción clara, responsable y realista de una ruta de montaña usando ÚNICAMENTE la información del JSON proporcionado.
+
+Normas:
+- No inventes información.
+- No añadas pasos técnicos que no estén indicados.
+- No menciones escalada salvo que se indique explícitamente.
+- Usa un tono informativo, no épico.
+- Prioriza la seguridad y la claridad.
+- No hagas recomendaciones médicas ni técnicas avanzadas.
+
+JSON:
+{guide}
+
+Eventos detectados:
+{events}
+
+Momentos clave:
+{key_moments}
+"""
+        description = anthropic_claude.generate_description(prompt)
 
         return JSONResponse(content={
             'data': records,
             'map_html': map_html,
-            'elevation_plot': elevation_plot
+            'elevation_plot': elevation_plot,
+            'description': description,
         })
 
     except Exception as e:
