@@ -1,38 +1,38 @@
+---
+// Layout base: fuentes, tema y metadatos. Los estilos viven en src/style/index.css.
+---
+
 <!doctype html>
-<html lang='en'>
+<html lang='es'>
   <head>
     <meta charset='UTF-8' />
-    <meta name='viewport' content='width=device-width' />
+    <meta name='viewport' content='width=device-width, initial-scale=1' />
+    <meta
+      name='description'
+      content='Sube una traza GPX y MontAIn devuelve métricas, pendientes, dificultad estimada y una descripción de guía escrita con IA.'
+    />
     <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
-    <link rel='icon' href='/favicon.ico' />
     <meta name='generator' content={Astro.generator} />
-    <title>MontAIn - Análisis de Rutas de Montaña</title>
+    <title>MontAIn · Análisis de rutas de montaña</title>
+
+    <!-- El tema se decide antes del primer pintado para evitar el destello:
+         preferencia guardada > preferencia del sistema. -->
+    <script is:inline>
+      const stored = localStorage.getItem('montain-theme')
+      const dark =
+        stored === 'dark' ||
+        (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches)
+      if (dark) document.documentElement.dataset.theme = 'dark'
+    </script>
+
+    <link rel='preconnect' href='https://fonts.googleapis.com' />
+    <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin />
+    <link
+      href='https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap'
+      rel='stylesheet'
+    />
   </head>
   <body>
     <slot />
   </body>
 </html>
-
-<style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  html,
-  body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    font-family:
-      'Inter',
-      -apple-system,
-      BlinkMacSystemFont,
-      'Segoe UI',
-      sans-serif;
-    background: #fafafa;
-    color: #1a1a1a;
-    line-height: 1.6;
-    padding: 20px;
-  }
-</style>

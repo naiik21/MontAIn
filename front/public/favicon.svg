@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Marca de sendero GR (blanca sobre roja) pintada sobre roca -->
+  <rect width="32" height="32" rx="7" fill="#4a4f4a"/>
+  <g transform="rotate(-4 16 16)">
+    <rect x="7" y="9.5" width="18" height="5" rx="1" fill="#f2f1ea"/>
+    <rect x="7" y="17.5" width="18" height="5" rx="1" fill="#c13a2a"/>
+  </g>
+</svg>

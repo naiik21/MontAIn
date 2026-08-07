@@ -6,29 +6,35 @@ const API_BASE = import.meta.env.PUBLIC_API_URL ?? 'http://localhost:8000'
 const API_URL = `${API_BASE.replace(/\/$/, '')}/process-gpx`
 
 /**
- * Hook personalizado para procesar archivos GPX
+ * Estado y llamada al analisis de una traza GPX.
  */
 export function useGPXProcessor() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
-  const [status, setStatus] = useState('Sube un archivo GPX y pulsa "Procesar ruta".')
   const [gpxData, setGpxData] = useState(null)
   const [mapHtml, setMapHtml] = useState(null)
   const [elevationPlot, setElevationPlot] = useState(null)
   const [description, setDescription] = useState(null)
-  const clearError = () => {
+
+  const clearError = () => setError(null)
+
+  /** Vuelve al estado inicial ("Nueva ruta"). */
+  const reset = () => {
+    setGpxData(null)
+    setMapHtml(null)
+    setElevationPlot(null)
+    setDescription(null)
     setError(null)
   }
 
   const processFile = async (file) => {
     if (!file) {
-      setError('Por favor, selecciona un archivo GPX')
+      setError('Selecciona primero un archivo GPX.')
       return
     }
 
     setIsLoading(true)
     setError(null)
-    setStatus('Enviando archivo al servidor...')
 
     const formData = new FormData()
     formData.append('file', file)
@@ -45,14 +51,9 @@ export function useGPXProcessor() {
       }
 
       const data = await response.json()
-      setStatus('Ruta procesada correctamente en el servidor.')
-
-      const processedData = data.data[0]
-      const mapHtml = data.map_html
-      const elevationPlot = data.elevation_plot
-      setGpxData(processedData)
-      setMapHtml(mapHtml)
-      setElevationPlot(elevationPlot)
+      setGpxData(data.data[0])
+      setMapHtml(data.map_html)
+      setElevationPlot(data.elevation_plot)
       setDescription(data.description ?? null)
     } catch (err) {
       // fetch solo lanza cuando la peticion no llega a salir (servidor caido,
@@ -62,7 +63,6 @@ export function useGPXProcessor() {
         ? `No se ha podido contactar con el servidor (${API_BASE}). Comprueba que esté en marcha.`
         : err.message || 'Error al procesar el archivo.'
       setError(errorMessage)
-      setStatus('Ha ocurrido un error al procesar la ruta.')
     } finally {
       setIsLoading(false)
     }
@@ -71,13 +71,12 @@ export function useGPXProcessor() {
   return {
     isLoading,
     error,
-    status,
     gpxData,
     mapHtml,
     elevationPlot,
     description,
     processFile,
-    clearError
+    clearError,
+    reset
   }
 }
-

@@ -128,6 +128,13 @@ Normas:
 - Prioriza la seguridad y la claridad.
 - No hagas recomendaciones médicas ni técnicas avanzadas.
 
+Formato:
+- Entre 250 y 350 palabras en total. Termina siempre la última frase.
+- Divide el texto en 2 o 3 secciones con un título corto en markdown (##).
+- Usa **negrita** solo para los datos y advertencias que más importan.
+- No repitas al principio el nombre ni las cifras de la ruta: ya se muestran
+  junto a esta descripción.
+
 JSON:
 {guide}
 

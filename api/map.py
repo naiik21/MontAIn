@@ -23,8 +23,8 @@ def get_map(gpx_file):
             for point in segment.points:
                 coords.append([point.latitude, point.longitude])
 
-    # Crear mapa centrado en la primera coordenada
-    mapa = folium.Map(location=coords[0], zoom_start=10)
+    # El mapa ocupa todo el iframe; el encuadre se ajusta a la traza al final.
+    mapa = folium.Map(location=coords[0], zoom_start=10, width='100%', height='100%')
     
     folium.Marker(
         location=[coords[0][0], coords[0][1]],
@@ -40,10 +40,27 @@ def get_map(gpx_file):
     ).add_to(mapa)
 
     # Dibujar la ruta
-    folium.PolyLine(coords, color='blue', weight=2.5, opacity=0.8).add_to(mapa)
+    folium.PolyLine(coords, color='#c13a2a', weight=3.5, opacity=0.9).add_to(mapa)
 
-    # Convertir mapa a HTML
-    map_html = mapa._repr_html_()
+    # Sin esto el documento hereda el margen por defecto del body y html/body
+    # no tienen altura, asi que Leaflet se inicializa midiendo mal su
+    # contenedor: el iframe saca barra de scroll y fit_bounds encuadra sobre
+    # un tamano equivocado (se acaba viendo la region entera, no la traza).
+    mapa.get_root().header.add_child(folium.Element(
+        "<style>html,body{height:100%;margin:0;padding:0;overflow:hidden}"
+        ".folium-map{position:absolute;inset:0}</style>"
+    ))
+
+    # Encuadrar la traza completa en vez de dejar un zoom fijo arbitrario.
+    lats = [c[0] for c in coords]
+    lons = [c[1] for c in coords]
+    mapa.fit_bounds([[min(lats), min(lons)], [max(lats), max(lons)]], padding=(20, 20))
+
+    # Documento HTML completo, listo para el srcdoc de un iframe.
+    # _repr_html_() no sirve aqui: esta pensado para Jupyter y devuelve un
+    # iframe anidado mas un aviso de "Make this Notebook Trusted", que dentro
+    # de nuestro iframe con sandbox impide que Leaflet arranque.
+    map_html = mapa.get_root().render()
 
     return map_html
 

@@ -1,79 +1,91 @@
-import { useState, useRef } from 'react'
-import '../style/index.css'
+import { useRef, useState } from 'react'
+
+function formatSize(bytes) {
+  if (bytes < 1024) return `${bytes} B`
+  if (bytes < 1024 * 1024) return `${Math.round(bytes / 1024)} KB`
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`
+}
 
 /**
- * Componente para subir archivos GPX con drag & drop
+ * Zona de subida con arrastrar-y-soltar. Dos pasos, como el backend:
+ * elegir el archivo y despues analizarlo.
  */
-export function FileUpload({ onFileSelect, onError, status, handleProcess, selectedFile, isLoading }) {
-  const [fileName, setFileName] = useState('')
+export function FileUpload({ selectedFile, onFileSelect, onError, onProcess }) {
   const [isDragging, setIsDragging] = useState(false)
-  const fileInputRef = useRef(null)
+  const inputRef = useRef(null)
 
-  const handleFileChange = (file) => {
-    if (file && file.name.endsWith('.gpx')) {
-      setFileName(file.name)
+  const handleFile = (file) => {
+    if (file && file.name.toLowerCase().endsWith('.gpx')) {
       onFileSelect(file)
     } else {
-      onError('Por favor, selecciona un archivo GPX')
+      onError('El archivo debe tener extensión .gpx')
     }
   }
 
-  const handleInputChange = (e) => {
-    if (e.target.files.length > 0) {
-      handleFileChange(e.target.files[0])
-    }
-  }
-
-  const handleDragOver = (e) => {
-    e.preventDefault()
-    setIsDragging(true)
-  }
-
-  const handleDragLeave = () => {
-    setIsDragging(false)
-  }
-
-  const handleDrop = (e) => {
+  const onDrop = (e) => {
     e.preventDefault()
     setIsDragging(false)
-
-    if (e.dataTransfer.files.length > 0) {
-      handleFileChange(e.dataTransfer.files[0])
-    }
+    if (e.dataTransfer.files.length > 0) handleFile(e.dataTransfer.files[0])
   }
 
   return (
     <div
-      className={`upload-section ${isDragging ? 'dragover' : ''}`}
-      onDragOver={handleDragOver}
-      onDragLeave={handleDragLeave}
-      onDrop={handleDrop}
+      className={`dropzone ${isDragging ? 'dropzone--active' : ''}`}
+      onDragOver={(e) => {
+        e.preventDefault()
+        setIsDragging(true)
+      }}
+      onDragLeave={() => setIsDragging(false)}
+      onDrop={onDrop}
     >
       <input
-        ref={fileInputRef}
-        type="file"
-        id="gpxFile"
-        accept=".gpx"
-        onChange={handleInputChange}
-        style={{ display: 'none' }}
+        ref={inputRef}
+        type='file'
+        accept='.gpx'
+        hidden
+        onChange={(e) => {
+          if (e.target.files.length > 0) handleFile(e.target.files[0])
+          e.target.value = '' // permite volver a elegir el mismo archivo
+        }}
       />
-      <label htmlFor="gpxFile" className="file-label">
-        Seleccionar archivo GPX
-      </label>
-      {fileName && (
-        <div className="file-name">Archivo seleccionado: {fileName}</div>
+
+      <span className='dropzone-ext'>.gpx</span>
+
+      {selectedFile ? (
+        <>
+          <div className='filechip'>
+            <span className='filechip-name'>{selectedFile.name}</span>
+            <span className='filechip-size'>{formatSize(selectedFile.size)}</span>
+          </div>
+          <div className='dropzone-actions'>
+            <button type='button' className='btn btn--primary' onClick={onProcess}>
+              Analizar ruta
+            </button>
+            <button
+              type='button'
+              className='link-quiet'
+              onClick={() => inputRef.current?.click()}
+            >
+              cambiar archivo
+            </button>
+          </div>
+        </>
+      ) : (
+        <>
+          <p className='dropzone-text'>Arrastra aquí la traza de tu ruta</p>
+          <div className='dropzone-actions'>
+            <button
+              type='button'
+              className='btn btn--primary'
+              onClick={() => inputRef.current?.click()}
+            >
+              Elegir archivo
+            </button>
+          </div>
+        </>
       )}
 
-       <button
-        id="upload"
-        onClick={handleProcess}
-        disabled={!selectedFile || isLoading}
-      >
-        Procesar ruta
-      </button>
-
-      <div style={{ fontSize: '14px', color: '#666666' }}>{status}</div>
+      <span className='dropzone-hint'>máx. 5 MB · solo .gpx</span>
     </div>
   )
 }
-

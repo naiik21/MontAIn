@@ -79,7 +79,9 @@ ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
 # no necesita la banda de precio de Opus ($5/$25 por millon de tokens frente a
 # $3/$15, con precio de lanzamiento $2/$10 hasta agosto de 2026).
 ANTHROPIC_MODEL = os.getenv("ANTHROPIC_MODEL", "claude-sonnet-5")
-ANTHROPIC_MAX_TOKENS = _int("ANTHROPIC_MAX_TOKENS", 1000)
+# Margen sobre la longitud que pide el prompt (~350 palabras). Con 1000 las
+# descripciones se cortaban a media frase.
+ANTHROPIC_MAX_TOKENS = _int("ANTHROPIC_MAX_TOKENS", 1600)
 
 # Permite desplegar la demo sin clave: el analisis funciona y la descripcion
 # se omite, en lugar de que falle la peticion entera.

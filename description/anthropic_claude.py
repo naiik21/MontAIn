@@ -1,6 +1,10 @@
+import logging
+
 import anthropic
 
 import config
+
+logger = logging.getLogger("montain.claude")
 
 _client = None
 
@@ -32,6 +36,15 @@ def generate_description(prompt):
         thinking={"type": "disabled"},
         messages=[{"role": "user", "content": prompt}],
     )
+    # Un texto cortado a media frase se ve feo y no siempre es evidente al
+    # revisar la salida: conviene que quede en el log.
+    if message.stop_reason == "max_tokens":
+        logger.warning(
+            "La descripcion se ha truncado en %s tokens. Sube ANTHROPIC_MAX_TOKENS "
+            "o acorta la longitud que pide el prompt.",
+            config.ANTHROPIC_MAX_TOKENS,
+        )
+
     # Se filtra por tipo de bloque en vez de asumir que el primero es texto:
     # si algun dia se reactiva el thinking, content[0] seria el razonamiento.
     return "".join(block.text for block in message.content if block.type == "text")
