@@ -1,0 +1,15 @@
+# Dependencias del pipeline de entrenamiento (python -m training.train).
+# Incluye las de la API porque los pasos `fetch` y `dataset` reutilizan
+# datasetter.py y Fetch/.
+-r ../requirements.txt
+
+# Entrenamiento y evaluacion
+scikit-learn==1.8.0
+
+# Graficas de evaluacion (solo con --plots)
+matplotlib==3.10.8
+seaborn==0.13.2
+
+# Solo para --model nn. El build de CPU es suficiente; para GPU instalar
+# desde el indice de PyTorch: https://pytorch.org/get-started/locally/
+torch==2.9.1

@@ -1,0 +1,227 @@
+{
+  "name": "MontAIn - GPX a WordPress",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Procesar Ruta GPX",
+        "formDescription": "Sube el archivo GPX y la imagen de portada para crear el post en WordPress",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "titulo",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "gpx",
+              "fieldType": "file",
+              "acceptFileTypes": ".gpx",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "imagen",
+              "fieldType": "file",
+              "acceptFileTypes": ".jpg,.jpeg,.png,.webp",
+              "requiredField": true
+            }
+          ]
+        },
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        1584,
+        528
+      ],
+      "id": "c6f8fd61-8904-4233-9771-e0f04276fd3b",
+      "name": "Form Trigger",
+      "webhookId": "e5452038-1b8f-4f1a-a1f9-3d4d27e68e04"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:8000/process-gpx",
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "parameterType": "formBinaryData",
+              "name": "file",
+              "inputDataFieldName": "gpx"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1872,
+        528
+      ],
+      "id": "67ae6405-b7ef-497c-9cad-221a83bfbdb7",
+      "name": "Procesar GPX"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Rescata el título y la imagen binaria del Form Trigger\n// porque el nodo HTTP anterior los sobreescribe con la respuesta de la API\nconst apiResponse = $input.first().json;\nconst formData = $('Form Trigger').first();\n\nreturn [{\n  json: {\n    ...apiResponse,\n    titulo: formData.json.titulo\n  },\n  binary: {\n    imagen: formData.binary.imagen\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2144,
+        528
+      ],
+      "id": "d6cb3a5b-c6c4-4f9d-8b9e-3b36415fdd32",
+      "name": "Recuperar Binarios"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:8881/wp-json/wp/v2/media",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Disposition",
+              "value": "={{ 'attachment; filename=\"' + $binary.imagen.fileName + '\"' }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "binaryData",
+        "inputDataFieldName": "imagen",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2432,
+        528
+      ],
+      "id": "008e869f-ca93-40d9-9866-31c61755976a",
+      "name": "Subir Imagen WP",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "cclpYFm6rQTzkyXY",
+          "name": "WP escalistas"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://host.docker.internal:8881/wp-json/wp/v2/posts",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify($json) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2912,
+        528
+      ],
+      "id": "76c69ed4-8acb-4159-b602-4319a8e50d31",
+      "name": "Crear Post WP",
+      "credentials": {
+        "httpBasicAuth": {
+          "id": "cclpYFm6rQTzkyXY",
+          "name": "WP escalistas"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const binarios = $('Recuperar Binarios').first().json;\nconst formData = $('Form Trigger').first().json;\nconst mediaId = $input.first().json.id;\n\nreturn [{\n  json: {\n    title: formData.titulo,\n    content: '',\n    status: 'draft',\n    featured_media: mediaId,\n    acf: {\n      distancia_km:         binarios.data[0].distance_km,\n      elevation_gain:       binarios.data[0].elevation_gain,\n      elevation_loss:       binarios.data[0].elevation_loss,\n      max_elevation:        binarios.data[0].max_elevation,\n      min_elevation:        binarios.data[0].min_elevation,\n      max_slope:            binarios.data[0].max_slope,\n      pendiente_media:      binarios.data[0].mean_slope,\n      pct_over_30:          binarios.data[0].pct_over_30,\n      pct_over_40:          binarios.data[0].pct_over_40,\n      pct_over_45:          binarios.data[0].pct_over_45,\n      mean_aspect:          binarios.data[0].mean_aspect,\n      rugosity_mean:        binarios.data[0].rugosity_mean,\n      exposed_pct:          binarios.data[0].exposed_pct,\n      difficulty:           binarios.data[0].difficulty,\n      elevation_chart_data: JSON.stringify(binarios.elevation_plot),\n      ai_description:       binarios.description\n    }\n  }\n}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2608,
+        528
+      ],
+      "id": "d0849b89-240a-4486-a2d5-1f7e43f3068c",
+      "name": "Code in JavaScript"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Form Trigger": {
+      "main": [
+        [
+          {
+            "node": "Procesar GPX",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Procesar GPX": {
+      "main": [
+        [
+          {
+            "node": "Recuperar Binarios",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recuperar Binarios": {
+      "main": [
+        [
+          {
+            "node": "Subir Imagen WP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Subir Imagen WP": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Crear Post WP",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "cc1f5fdc-d2a7-4954-89c6-33c7c43e8f25",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "4af1938d1f4a59ed6f42a52d14cb259af9d68f1533e14591fdfbc1ef96953d88"
+  },
+  "id": "QlW1DjhfLafCG6Xk",
+  "tags": []
+}

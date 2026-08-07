@@ -2,6 +2,7 @@ import numpy as np
 from geopy.distance import geodesic
 import pandas as pd
 import glob
+from pathlib import Path
 from GPX_uses.gpx_loader import load_gpx
 import xgboost as xgb
 import math
@@ -417,9 +418,33 @@ def redondear_personalizado(numero):
     else:
         return math.floor(numero)  # Redondear hacia abajo
 
+MODEL_PATH = Path(__file__).resolve().parent / "xgboost_regresion.json"
+
+_model_xgb = None
+
+
+def load_model():
+    """
+    Carga el modelo XGBoost una sola vez y lo reutiliza.
+
+    La ruta se resuelve respecto a este archivo, no al directorio de trabajo,
+    para que la API funcione arranque desde donde arranque.
+    """
+    global _model_xgb
+    if _model_xgb is None:
+        if not MODEL_PATH.exists():
+            raise FileNotFoundError(
+                f"No se encuentra el modelo en {MODEL_PATH}. "
+                "Generalo con: python -m training.train train --model xgboost-reg "
+                "--save xgboost_regresion.json"
+            )
+        _model_xgb = xgb.Booster()
+        _model_xgb.load_model(str(MODEL_PATH))
+    return _model_xgb
+
+
 def set_difficulty_with_model(features):
-    model_xgb = xgb.Booster()
-    model_xgb.load_model("xgboost_regresion.json")
+    model_xgb = load_model()
     features_array = np.array(list(features.values())).reshape(1, -1)
     # Convertir el array a DMatrix
     dmatrix = xgb.DMatrix(features_array, feature_names=list(features.keys()))

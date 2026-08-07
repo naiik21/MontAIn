@@ -1,7 +1,5 @@
 import gpxpy
 import folium
-import gpxpy
-import matplotlib.pyplot as plt
 import srtm
 
 def get_map(gpx_file):

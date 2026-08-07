@@ -1,7 +1,6 @@
 # Entornos virtuales Python
 .venv
 venv
-api/.venv
 
 # Cachés de Python
 __pycache__/
@@ -9,17 +8,17 @@ __pycache__/
 
 # Variables de entorno (nunca a git)
 .env
-api/.env
 front/.env
-front\node_modules
 
 # Datos pesados / locales
 data/
 bigDataset.csv
 dataset.csv
 
-# Node (frontend)
+# Node / build (frontend)
 front/node_modules
+front/dist
+front/.astro
 front/.vercel
 
 # Otros típicos

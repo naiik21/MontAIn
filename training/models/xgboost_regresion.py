@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error, balanced_accuracy_score, classification_report
 
 
-def xgboost_regresion(dataset_path="./dataset.csv", test_size=0.25, random_state=42):
+def xgboost_regresion(dataset_path="./dataset.csv", test_size=0.25, random_state=42, save_path=None):
     """
     Entrena y evalúa un modelo XGBoost de regresión para predecir dificultad,
     luego discretiza las predicciones a clases ordinales.
@@ -14,7 +14,8 @@ def xgboost_regresion(dataset_path="./dataset.csv", test_size=0.25, random_state
         dataset_path (str): Ruta al archivo CSV del dataset
         test_size (float): Proporción del dataset para test (default: 0.25)
         random_state (int): Semilla para reproducibilidad (default: 42)
-    
+        save_path (str): Si se indica, guarda el modelo entrenado en esa ruta (default: None)
+
     Returns:
         dict: Diccionario con el modelo entrenado, métricas y datos de evaluación
     """
@@ -98,8 +99,11 @@ def xgboost_regresion(dataset_path="./dataset.csv", test_size=0.25, random_state
     print(classification_report(y_test, y_pred_class))
 
 
-    # reg_model.save_model('xgboost_regresion.json')
-    
+    if save_path:
+        reg_model.save_model(save_path)
+        print(f"Modelo guardado en {save_path}")
+
+
     return {
         "model": reg_model,
         "X_train": X_train,
