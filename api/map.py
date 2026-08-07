@@ -6,7 +6,7 @@ import srtm
 
 def get_map(gpx_file):
     # Leer el archivo GPX
-    with open(gpx_file, 'r') as gpx_file:
+    with open(gpx_file, 'r', encoding='utf-8') as gpx_file:
         gpx = gpxpy.parse(gpx_file)
 
     # Extraer coordenadas
@@ -44,7 +44,7 @@ def get_map(gpx_file):
 
 def get_elevation(gpx_file):
     # Leer archivo GPX
-    with open(gpx_file, 'r') as f:
+    with open(gpx_file, 'r', encoding='utf-8') as f:
         gpx = gpxpy.parse(f)
 
     # Completar elevaciones usando SRTM (si faltan / están a 0)

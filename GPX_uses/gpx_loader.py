@@ -6,7 +6,7 @@ from typing import Tuple, Union
 
 
 def load_gpx(path: str):
-    with open(path, "r") as f:
+    with open(path, "r", encoding="utf-8") as f:
         gpx = gpxpy.parse(f)
         name = gpx.name
 
@@ -39,7 +39,7 @@ def load_gpx_from_url(source: Union[str, bytes]) -> Tuple[gpxpy.gpx.GPX, str]:
 
 
 def gpx_to_dataframe(gpx_path):
-    with open(gpx_path, "r") as f:
+    with open(gpx_path, "r", encoding="utf-8") as f:
         gpx = gpxpy.parse(f)
 
     points = []
