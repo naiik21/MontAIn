@@ -1,6 +1,9 @@
 import { useState } from 'react'
 
-const API_URL = 'http://localhost:8000/process-gpx'
+// Configurable en despliegue con PUBLIC_API_URL (Astro expone al cliente las
+// variables con prefijo PUBLIC_). En local basta con no definirla.
+const API_BASE = import.meta.env.PUBLIC_API_URL ?? 'http://localhost:8000'
+const API_URL = `${API_BASE.replace(/\/$/, '')}/process-gpx`
 
 /**
  * Hook personalizado para procesar archivos GPX
@@ -52,9 +55,12 @@ export function useGPXProcessor() {
       setElevationPlot(elevationPlot)
       setDescription(data.description ?? null)
     } catch (err) {
-      const errorMessage =
-        err.message ||
-        'Error al procesar el archivo. Asegúrate de que el servidor esté corriendo en http://localhost:8000'
+      // fetch solo lanza cuando la peticion no llega a salir (servidor caido,
+      // CORS, sin red); su mensaje generico no le dice nada al usuario.
+      const isNetworkError = err instanceof TypeError
+      const errorMessage = isNetworkError
+        ? `No se ha podido contactar con el servidor (${API_BASE}). Comprueba que esté en marcha.`
+        : err.message || 'Error al procesar el archivo.'
       setError(errorMessage)
       setStatus('Ha ocurrido un error al procesar la ruta.')
     } finally {

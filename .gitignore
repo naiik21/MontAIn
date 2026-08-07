@@ -15,6 +15,9 @@ data/
 bigDataset.csv
 dataset.csv
 
+# Cache de tiles de elevacion SRTM
+.srtm-cache/
+
 # Node / build (frontend)
 front/node_modules
 front/dist

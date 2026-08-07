@@ -1,0 +1,25 @@
+# Despliegue de la API en Render (https://render.com/docs/blueprint-spec).
+# El frontend va aparte en Vercel, con front/ como root del proyecto.
+services:
+  - type: web
+    name: montain-api
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /health
+
+    # Disco persistente para los tiles de elevacion SRTM. Sin el, cada
+    # arranque en frio vuelve a descargarlos y la primera peticion se dispara.
+    disk:
+      name: srtm-cache
+      mountPath: /app/.srtm-cache
+      sizeGB: 2
+
+    envVars:
+      - key: SRTM_CACHE_DIR
+        value: /app/.srtm-cache
+      # Dominio del frontend desplegado.
+      - key: CORS_ORIGINS
+        sync: false
+      # Se configura en el panel; nunca en el repositorio.
+      - key: ANTHROPIC_API_KEY
+        sync: false

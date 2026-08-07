@@ -1,6 +1,10 @@
+import os
+
 import gpxpy
 import folium
 import srtm
+
+import config
 
 def get_map(gpx_file):
     # Leer el archivo GPX
@@ -40,14 +44,34 @@ def get_map(gpx_file):
     return map_html
 
 
+_elevation_data = None
+
+
+def get_elevation_data():
+    """
+    Devuelve el cliente SRTM, creandolo una sola vez.
+
+    srtm.get_data() prepara el indice de tiles en cada llamada, y los tiles se
+    descargan bajo demanda. Cachear el cliente y fijar local_cache_dir a un
+    directorio persistente evita repetir ambas cosas en cada peticion.
+    """
+    global _elevation_data
+    if _elevation_data is None:
+        os.makedirs(config.SRTM_CACHE_DIR, exist_ok=True)
+        _elevation_data = srtm.get_data(
+            local_cache_dir=config.SRTM_CACHE_DIR,
+            timeout=config.SRTM_TIMEOUT_SECONDS,
+        )
+    return _elevation_data
+
+
 def get_elevation(gpx_file):
     # Leer archivo GPX
     with open(gpx_file, 'r', encoding='utf-8') as f:
         gpx = gpxpy.parse(f)
 
     # Completar elevaciones usando SRTM (si faltan / están a 0)
-    elevation_data = srtm.get_data()
-    elevation_data.add_elevations(gpx, smooth=True)
+    get_elevation_data().add_elevations(gpx, smooth=True)
 
     distancias = []
     elevaciones = []

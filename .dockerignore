@@ -1,0 +1,24 @@
+# Entornos y cachés
+.venv
+venv
+__pycache__/
+*.pyc
+.srtm-cache
+
+# Secretos
+.env
+
+# El frontend se despliega aparte (Vercel), no va en la imagen de la API
+front/
+
+# Datos y entrenamiento: la API solo necesita el modelo ya entrenado
+data/
+dataset.csv
+bigDataset.csv
+training/
+
+# Repositorio y documentación
+.git
+.gitignore
+*.md
+integrations/
