@@ -1,10 +1,14 @@
+import logging
 import os
+import tempfile
 
 import gpxpy
 import folium
 import srtm
 
 import config
+
+logger = logging.getLogger("montain.map")
 
 def get_map(gpx_file):
     # Leer el archivo GPX
@@ -57,12 +61,41 @@ def get_elevation_data():
     """
     global _elevation_data
     if _elevation_data is None:
-        os.makedirs(config.SRTM_CACHE_DIR, exist_ok=True)
         _elevation_data = srtm.get_data(
-            local_cache_dir=config.SRTM_CACHE_DIR,
+            local_cache_dir=_usable_cache_dir(),
             timeout=config.SRTM_TIMEOUT_SECONDS,
         )
     return _elevation_data
+
+
+def _usable_cache_dir() -> str:
+    """
+    Devuelve SRTM_CACHE_DIR si se puede escribir en el; si no, un temporal.
+
+    En un despliegue con disco persistente, el volumen se monta ENCIMA del
+    directorio de la imagen y trae su propia propiedad, que puede no coincidir
+    con el usuario del contenedor. Sin esta comprobacion, el primer intento de
+    descargar un tile tumbaria la peticion. Cayendo a un temporal la API sigue
+    funcionando: los tiles se redescargan en cada arranque, que es lento pero
+    no es una caida.
+    """
+    path = config.SRTM_CACHE_DIR
+    try:
+        os.makedirs(path, exist_ok=True)
+        probe = os.path.join(path, ".escritura")
+        with open(probe, "w") as f:
+            f.write("ok")
+        os.unlink(probe)
+        return path
+    except OSError as e:
+        fallback = os.path.join(tempfile.gettempdir(), "montain-srtm")
+        os.makedirs(fallback, exist_ok=True)
+        logger.warning(
+            "No se puede escribir en SRTM_CACHE_DIR (%s): %s. "
+            "Usando %s; los tiles se redescargaran en cada arranque.",
+            path, e, fallback,
+        )
+        return fallback
 
 
 def get_elevation(gpx_file):
