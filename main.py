@@ -1,3 +1,4 @@
+import hashlib
 import logging
 import os
 import tempfile
@@ -15,6 +16,7 @@ import description.build_compute as build_compute
 import description.detection_events as detection_events
 import description.key_moments as key_moment
 import description.anthropic_claude as anthropic_claude
+from api.cache import LRUCache
 from api.ratelimit import SlidingWindowRateLimiter, client_ip
 from GPX_uses.gpx_loader import gpx_to_dataframe
 
@@ -46,6 +48,8 @@ limiter = SlidingWindowRateLimiter(
     max_requests=config.RATE_LIMIT_REQUESTS,
     window_seconds=config.RATE_LIMIT_WINDOW_SECONDS,
 )
+
+analysis_cache = LRUCache(max_entries=config.ANALYSIS_CACHE_SIZE)
 
 
 @app.get("/")
@@ -155,6 +159,18 @@ async def process_gpx(request: Request, file: UploadFile = File(...)):
             detail=f"El archivo supera el límite de {config.MAX_UPLOAD_BYTES // (1024 * 1024)} MB.",
         )
 
+    # La cache se consulta antes que el rate limit: servir un resultado ya
+    # calculado no cuesta CPU ni una llamada a Claude, asi que no gasta cuota.
+    # En una demo publica lo habitual es que mucha gente pruebe con los mismos
+    # archivos de ejemplo.
+    file_hash = hashlib.sha256(contents).hexdigest()
+    cached = analysis_cache.get(file_hash)
+    if cached is not None:
+        # Si la entrada se cacheo sin API key (description=None) y ahora hay
+        # clave configurada, se reprocesa para completarla.
+        if cached["description"] is not None or not config.DESCRIPTION_ENABLED:
+            return JSONResponse(content=cached, headers={"X-Montain-Cache": "hit"})
+
     tmp_path = None
     try:
         with tempfile.NamedTemporaryFile(delete=False, suffix=".gpx") as tmp:
@@ -188,12 +204,15 @@ async def process_gpx(request: Request, file: UploadFile = File(...)):
 
         description = _build_description(record, tmp_path)
 
-        return JSONResponse(content={
+        payload = {
             'data': records,
             'map_html': map_html,
             'elevation_plot': elevation_plot,
             'description': description,
-        })
+        }
+        analysis_cache.put(file_hash, payload)
+
+        return JSONResponse(content=payload, headers={"X-Montain-Cache": "miss"})
 
     except GPXValidationError as e:
         raise HTTPException(status_code=400, detail=str(e))

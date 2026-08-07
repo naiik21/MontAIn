@@ -57,6 +57,10 @@ MAX_TRACK_POINTS = _int("MAX_TRACK_POINTS", 50_000)
 RATE_LIMIT_REQUESTS = _int("RATE_LIMIT_REQUESTS", 10)
 RATE_LIMIT_WINDOW_SECONDS = _int("RATE_LIMIT_WINDOW_SECONDS", 3600)
 
+# Resultados de analisis cacheados por hash del archivo. Cada entrada ronda
+# los 100 KB (mapa + perfil + descripcion); 128 entradas ~ 13 MB. 0 desactiva.
+ANALYSIS_CACHE_SIZE = _int("ANALYSIS_CACHE_SIZE", 128)
+
 
 # --- Datos de elevacion ----------------------------------------------------
 
@@ -70,7 +74,11 @@ SRTM_TIMEOUT_SECONDS = _int("SRTM_TIMEOUT_SECONDS", 30)
 # --- IA --------------------------------------------------------------------
 
 ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
-ANTHROPIC_MODEL = os.getenv("ANTHROPIC_MODEL", "claude-opus-4-6")
+
+# claude-sonnet-5: la descripcion es un texto corto sobre un JSON ya calculado,
+# no necesita la banda de precio de Opus ($5/$25 por millon de tokens frente a
+# $3/$15, con precio de lanzamiento $2/$10 hasta agosto de 2026).
+ANTHROPIC_MODEL = os.getenv("ANTHROPIC_MODEL", "claude-sonnet-5")
 ANTHROPIC_MAX_TOKENS = _int("ANTHROPIC_MAX_TOKENS", 1000)
 
 # Permite desplegar la demo sin clave: el analisis funciona y la descripcion

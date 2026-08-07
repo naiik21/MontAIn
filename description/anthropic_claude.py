@@ -22,8 +22,16 @@ def get_client():
 
 
 def generate_description(prompt):
-    return get_client().messages.create(
+    # thinking desactivado a proposito: en los modelos actuales viene activado
+    # por defecto y sus tokens cuentan contra max_tokens, asi que una tarea de
+    # redaccion corta podria gastar el presupuesto en razonar y truncar el
+    # texto. Aqui no aporta: el analisis ya viene calculado en el prompt.
+    message = get_client().messages.create(
         model=config.ANTHROPIC_MODEL,
         max_tokens=config.ANTHROPIC_MAX_TOKENS,
+        thinking={"type": "disabled"},
         messages=[{"role": "user", "content": prompt}],
-    ).content[0].text
+    )
+    # Se filtra por tipo de bloque en vez de asumir que el primero es texto:
+    # si algun dia se reactiva el thinking, content[0] seria el razonamiento.
+    return "".join(block.text for block in message.content if block.type == "text")
