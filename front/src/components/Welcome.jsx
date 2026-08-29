@@ -92,7 +92,10 @@ export function Welcome() {
                   clearError()
                 }}
                 onError={setLocalError}
-                onProcess={() => processFile(selectedFile)}
+                onProcess={(file) => {
+                  setLocalError(null)
+                  processFile(file)
+                }}
               />
             )}
 

@@ -6,13 +6,41 @@ function formatSize(bytes) {
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`
 }
 
+/*
+ * Trazas de muestra para quien llega sin un GPX a mano. Se sirven como
+ * ficheros estaticos y se envian por el mismo camino que una subida normal,
+ * asi que aprovechan la cache del backend: solo la primera visita paga el
+ * analisis y la llamada a Claude.
+ */
+const EXAMPLES = [
+  { file: 'almanzor.gpx', name: 'Almanzor', detail: '8,2 km · +1789 m' },
+  { file: 'olivos-centenarios.gpx', name: 'Olivos Centenarios', detail: '6,7 km · +240 m' },
+]
+
 /**
  * Zona de subida con arrastrar-y-soltar. Dos pasos, como el backend:
  * elegir el archivo y despues analizarlo.
  */
 export function FileUpload({ selectedFile, onFileSelect, onError, onProcess }) {
   const [isDragging, setIsDragging] = useState(false)
+  const [loadingExample, setLoadingExample] = useState(null)
   const inputRef = useRef(null)
+
+  const loadExample = async (example) => {
+    setLoadingExample(example.file)
+    try {
+      const res = await fetch(`/ejemplos/${example.file}`)
+      if (!res.ok) throw new Error()
+      const blob = await res.blob()
+      // Se envuelve en un File para que siga exactamente el mismo camino
+      // que un archivo elegido por el usuario.
+      onProcess(new File([blob], example.file, { type: 'application/gpx+xml' }))
+    } catch {
+      onError('No se ha podido cargar la ruta de ejemplo.')
+    } finally {
+      setLoadingExample(null)
+    }
+  }
 
   const handleFile = (file) => {
     if (file && file.name.toLowerCase().endsWith('.gpx')) {
@@ -58,7 +86,11 @@ export function FileUpload({ selectedFile, onFileSelect, onError, onProcess }) {
             <span className='filechip-size'>{formatSize(selectedFile.size)}</span>
           </div>
           <div className='dropzone-actions'>
-            <button type='button' className='btn btn--primary' onClick={onProcess}>
+            <button
+              type='button'
+              className='btn btn--primary'
+              onClick={() => onProcess(selectedFile)}
+            >
               Analizar ruta
             </button>
             <button
@@ -81,6 +113,24 @@ export function FileUpload({ selectedFile, onFileSelect, onError, onProcess }) {
             >
               Elegir archivo
             </button>
+          </div>
+
+          <div className='examples'>
+            <span className='examples-label'>o prueba con una ruta de ejemplo</span>
+            <div className='examples-list'>
+              {EXAMPLES.map((ex) => (
+                <button
+                  key={ex.file}
+                  type='button'
+                  className='example'
+                  onClick={() => loadExample(ex)}
+                  disabled={loadingExample !== null}
+                >
+                  <span className='example-name'>{ex.name}</span>
+                  <span className='example-detail'>{ex.detail}</span>
+                </button>
+              ))}
+            </div>
           </div>
         </>
       )}
