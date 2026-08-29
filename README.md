@@ -15,6 +15,94 @@ los 2523 m. Dos rutas a distinta cota se distinguen antes de leer una sola cifra
 
 ![Ficha de ruta con mapa, perfil de elevación, métricas y descripción](docs/captura-ficha.png)
 
+## Prueba rápida
+
+Lo mínimo para ver el análisis funcionando. No necesita el frontend ni clave de API:
+
+```bash
+git clone https://github.com/naiik21/MontAIn.git
+cd MontAIn
+
+python -m venv .venv
+source .venv/bin/activate          # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+
+python analyze_gpx.py front/public/ejemplos/almanzor.gpx
+```
+
+```
+  Almanzor por el Camino del Tío Domingo
+  ----------------------------------------------
+  Dificultad estimada   alpinismo ligero
+  Distancia             8,2 km
+  Desnivel +/-          1.789 / 491 m
+  Cotas min/max         1.193 / 2.523 m
+  Pendiente media/max   8,8 / 84,8 grados
+  Tramo > 30 grados     14,0 %
+```
+
+Añade `--json` para la salida completa, con el mapa y el perfil, lista para redirigir
+a un fichero o a otro programa.
+
+En [`front/public/ejemplos/`](front/public/ejemplos/) hay dos trazas de muestra.
+Cualquier `.gpx` sirve: puedes exportarlos de Wikiloc, Strava, Komoot o de tu reloj.
+
+## La aplicación completa
+
+Son dos procesos: la API en Python y el frontend en Astro. Necesitas Python 3.11 y
+Node 20.
+
+### 1. La API
+
+Con el entorno ya creado en el paso anterior:
+
+```bash
+cp .env.example .env               # Windows: copy .env.example .env
+python main.py
+```
+
+Arranca en `http://localhost:8000`, con la documentación interactiva en
+`http://localhost:8000/docs`.
+
+La descripción con IA es opcional. Si quieres generarla, pon tu clave de
+[console.anthropic.com](https://console.anthropic.com) en `.env`:
+
+```
+ANTHROPIC_API_KEY=sk-ant-...
+```
+
+Sin clave todo lo demás funciona igual y el campo `description` viene a `null`.
+
+### 2. El frontend
+
+En otra terminal:
+
+```bash
+cd front
+pnpm install                       # o npm install
+pnpm dev                           # o npm run dev
+```
+
+Abre `http://localhost:4321`. Si la API no está en `localhost:8000`, copia
+`front/.env.example` a `front/.env` y define ahí `PUBLIC_API_URL`.
+
+## Configuración
+
+Todo tiene un valor por defecto pensado para desarrollo, así que la API arranca sin
+configurar nada. [`.env.example`](.env.example) documenta cada variable; estas son
+las que más se tocan:
+
+| Variable | Por defecto | Para qué |
+|---|---|---|
+| `ANTHROPIC_API_KEY` | — | Sin ella no se generan descripciones |
+| `ANTHROPIC_MODEL` | `claude-sonnet-5` | Modelo que redacta la descripción |
+| `CORS_ORIGINS` | localhost | Dominios que pueden llamar a la API |
+| `MAX_UPLOAD_BYTES` | 5 MB | Tamaño máximo del GPX |
+| `MAX_TRACK_POINTS` | 50 000 | Puntos máximos de la traza |
+| `RATE_LIMIT_REQUESTS` | 10 / hora | Peticiones por IP |
+| `ANALYSIS_CACHE_SIZE` | 128 | Resultados cacheados por hash del archivo |
+| `SRTM_CACHE_DIR` | `.srtm-cache` | Dónde se guardan los tiles de elevación |
+
 ## Cómo funciona
 
 Una petición a `POST /process-gpx` recorre este camino:
@@ -28,8 +116,8 @@ Una petición a `POST /process-gpx` recorre este camino:
 | Mapa | Folium sobre OpenStreetMap, servido en un iframe con sandbox |
 | Descripción | Claude redacta una guía a partir de las features, los eventos del recorrido y los momentos clave |
 
-La descripción es opcional: sin `ANTHROPIC_API_KEY` el análisis funciona igual y el
-campo `description` viene a `null`.
+Los resultados se cachean por hash del archivo: el mismo GPX no se analiza ni se envía
+a Claude dos veces.
 
 ## Sobre la estimación de dificultad
 
@@ -40,50 +128,16 @@ los falsos positivos —hay paseos suaves que salen como "difícil"— y corregi
 reetiquetar el dataset con criterio humano o con una fuente externa. Úsalo como una
 orientación, no como un grado oficial.
 
-## Puesta en marcha
+## Si algo falla
 
-Requiere Python 3.11 y Node 20.
-
-### API
-
-```bash
-python -m venv .venv
-source .venv/bin/activate        # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
-cp .env.example .env             # opcional: rellena ANTHROPIC_API_KEY
-python main.py
-```
-
-En `http://localhost:8000/docs` está la documentación interactiva.
-
-### Frontend
-
-```bash
-cd front
-pnpm install
-pnpm dev
-```
-
-En `http://localhost:4321`. Si la API no está en `localhost:8000`, define
-`PUBLIC_API_URL` en `front/.env` (ver `front/.env.example`).
-
-## Configuración
-
-Todo tiene un valor por defecto pensado para desarrollo, así que la API arranca sin
-configurar nada. En producción se sobreescribe desde el panel del proveedor.
-
-| Variable | Por defecto | Para qué |
-|---|---|---|
-| `ANTHROPIC_API_KEY` | — | Sin ella no se generan descripciones |
-| `ANTHROPIC_MODEL` | `claude-sonnet-5` | Modelo que redacta la descripción |
-| `CORS_ORIGINS` | localhost | Dominios que pueden llamar a la API |
-| `MAX_UPLOAD_BYTES` | 5 MB | Tamaño máximo del GPX |
-| `MAX_TRACK_POINTS` | 50 000 | Puntos máximos de la traza |
-| `RATE_LIMIT_REQUESTS` | 10 / hora | Peticiones por IP |
-| `ANALYSIS_CACHE_SIZE` | 128 | Resultados cacheados por hash del archivo |
-| `SRTM_CACHE_DIR` | `.srtm-cache` | Dónde se guardan los tiles de elevación |
-
-Lista completa en [`.env.example`](.env.example).
+| Síntoma | Causa |
+|---|---|
+| `No se ha podido contactar con el servidor` en el navegador | La API no está arrancada, o `PUBLIC_API_URL` apunta a otro sitio |
+| La primera petición tarda muchísimo | SRTM está descargando los tiles de elevación de la zona. Se cachean en `SRTM_CACHE_DIR` y la siguiente ya es rápida |
+| `description` siempre viene a `null` | Falta `ANTHROPIC_API_KEY` en `.env`. Compruébalo en `/health` |
+| `El GPX no contiene ningún punto de track` | El archivo solo tiene waypoints, sin traza |
+| `429` al probar varias rutas seguidas | El límite por IP. Sube `RATE_LIMIT_REQUESTS` en `.env` |
+| La descripción se corta a media frase | `ANTHROPIC_MAX_TOKENS` demasiado bajo |
 
 ## Despliegue
 
@@ -98,6 +152,9 @@ docker run -p 8000:8000 -e ANTHROPIC_API_KEY=... montain-api
 [`render.yaml`](render.yaml) despliega la API en Render con un disco persistente para
 los tiles SRTM. Sin ese disco, cada arranque en frío vuelve a descargarlos y la primera
 petición se dispara.
+
+Los dos servicios se apuntan mutuamente: `CORS_ORIGINS` en la API con el dominio de
+Vercel, y `PUBLIC_API_URL` en Vercel con el de Render.
 
 ## Entrenamiento
 
@@ -119,6 +176,7 @@ Hay cuatro modelos comparables (`baseline`, `xgboost`, `xgboost-reg`, `nn`) en
 
 ```
 main.py              API FastAPI
+analyze_gpx.py       CLI para analizar un GPX sin levantar la API
 config.py            Configuración por variables de entorno
 datasetter.py        Features del recorrido y estimación de dificultad
 api/                 Mapa, rate limiting y caché

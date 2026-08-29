@@ -403,8 +403,7 @@ def build_dataset(gpx_dir="data/gpx"):
         # Agregar clasificación de dificultad
         row["difficulty"] = get_difficulty_name(classify_difficulty(features))
         rows.append(row)
-    print(rows)
-        
+
     return pd.DataFrame(rows)
 
 
@@ -468,7 +467,6 @@ def build_dataset_from_file(gpx_path: str) -> pd.DataFrame:
     - DataFrame de una sola fila con:
       filename, todas las features agregadas y la columna difficulty.
     """
-    print(gpx_path)
     df, name = load_gpx(gpx_path)
     df = enrich_features(df)
 

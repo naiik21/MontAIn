@@ -1,8 +1,5 @@
 import gpxpy
 import pandas as pd
-import srtm
-import requests
-from typing import Tuple, Union
 
 
 def load_gpx(path: str):
@@ -17,25 +14,6 @@ def load_gpx(path: str):
                 data.append([point.latitude, point.longitude, point.elevation])
 
     return pd.DataFrame(data, columns=["lat", "lon", "ele"]), name
-
-
-def load_gpx_from_url(source: Union[str, bytes]) -> Tuple[gpxpy.gpx.GPX, str]:
-    """
-    Carga un GPX desde una URL (string) o desde contenido en memoria (bytes).
-
-    - Si `source` es str, se asume que es una URL y se hace un requests.get().
-    - Si `source` son bytes, se parsea directamente el contenido GPX.
-    """
-    if isinstance(source, str):
-        response = requests.get(source)
-        response.raise_for_status()
-        gpx = gpxpy.parse(response.content)
-    else:
-        # Se asume que es contenido GPX en bytes (por ejemplo, un archivo subido)
-        gpx = gpxpy.parse(source)
-
-    name = gpx.name
-    return gpx, name
 
 
 def gpx_to_dataframe(gpx_path):

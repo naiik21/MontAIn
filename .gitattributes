@@ -1,0 +1,13 @@
+# Los archivos de texto se guardan con LF en el repositorio, sin depender de
+# la configuracion de git de cada maquina. Evita que Windows y Linux se pisen
+# los finales de linea al colaborar.
+* text=auto eol=lf
+
+# Binarios: git no debe tocarlos.
+*.png binary
+*.ico binary
+*.json.gz binary
+
+# El modelo entrenado es un JSON grande y generado: no tiene sentido verlo en
+# los diffs ni fusionarlo a mano.
+xgboost_regresion.json -diff -merge

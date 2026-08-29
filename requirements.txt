@@ -23,4 +23,8 @@ folium==0.20.0
 
 # Descripcion generada por IA
 anthropic==0.79.0
+
+# No lo importa nuestro codigo: lo necesitan SRTM.py para bajar los tiles de
+# elevacion y folium para sus recursos. Se fija aqui para que el despliegue
+# sea reproducible en vez de depender de la version que resuelva pip.
 requests==2.32.5
